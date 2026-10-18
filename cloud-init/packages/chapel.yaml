@@ -1,0 +1,15 @@
+# Chapel with GPU support (CUDA), built with Spack. Chapel needs LLVM, with CUDA 13 at least LLVM 22;
+# it uses the Spack LLVM that llvm-offload also provides (configured in spack.yaml), so only one LLVM
+# is installed. The optional Chapel modules that pull in HDF5, ZeroMQ, Protobuf, YAML, curl, OpenSSL
+# and libevent are switched off.
+gpuaas:
+  title: Chapel with GPU support
+  group: HPC (Spack, Ubuntu 24.04)
+  order: 54
+  requires: [spack]
+  long: true
+  disk: 4.5  # with LLVM (4.2 GB, shared with llvm-offload)
+  os:
+    ubuntu-24.04: tested
+    ubuntu-26.04: "no: Chapel's GPU support allows CUDA up to 13.0, which conflicts with the glibc of Ubuntu 26.04"
+  build: gpuaas-spack chapel +cuda cuda_arch=@CUDA_ARCH@ llvm=spack ~curl ~hdf5 ~libevent ~protobuf ~ssl ~yaml ~zmq

@@ -1,0 +1,22 @@
+# Template for clouds.yaml (HS Fulda NetLab OpenStack). Never put your password into it.
+#
+# gpuaas.py creates clouds.yaml from this file on its first run: it asks for your username
+# and password, lets you choose your project and writes clouds.yaml without the password.
+# Run "./gpuaas.py setup" to create it again, e.g. for another user or project.
+#
+# By hand: copy this file to clouds.yaml next to gpuaas.py and fill in your username and
+# project ID (Horizon: Project > API Access > View Credentials).
+clouds:
+  openstack:
+    auth:
+      auth_url: https://private-cloud.informatik.hs-fulda.de:5000
+      username: YOUR_USERNAME
+      project_id: YOUR_PROJECT_ID
+      user_domain_name: Default
+    region_name: RegionOne
+    interface: public
+    identity_api_version: 3
+    # The login URL has a public certificate, but the service endpoints in the cloud's catalog
+    # use certificates of the cloud's own CA. Until that CA certificate is available (then use
+    # "cacert: /path/to/ca.pem" instead), TLS verification has to stay off.
+    verify: false

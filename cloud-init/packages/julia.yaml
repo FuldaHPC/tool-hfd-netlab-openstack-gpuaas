@@ -1,0 +1,27 @@
+# Julia (newest stable release via juliaup, the official installer, for user ubuntu) with Dagger and
+# CUDA.jl. Julia is not built with Spack: Spack's Julia would build 44 packages including its own
+# LLVM, while the official binary brings everything. CUDA.jl uses the stack's CUDA 13.0 from Spack
+# (local toolkit) instead of downloading its own CUDA runtime. GPU support of Dagger is part of
+# Dagger itself (DaggerGPU is deprecated): using Dagger, CUDA.
+gpuaas:
+  title: Julia with Dagger and CUDA.jl
+  group: HPC (Spack, Ubuntu 24.04)
+  order: 55
+  requires: [spack]
+  disk: 4
+  os:
+    ubuntu-24.04: tested
+    ubuntu-26.04: "no: uses the CUDA 13.0 of the Spack HPC stack"
+  build: |
+    gpuaas-spack cuda
+    runuser -u ubuntu -- env HOME=/home/ubuntu bash -lc 'curl -fsSL https://install.julialang.org | sh -s -- --yes'
+    runuser -u ubuntu -- env HOME=/home/ubuntu bash -lc '. /usr/share/modules/init/sh && module load cuda && ~/.juliaup/bin/julia /usr/local/share/gpuaas/julia-setup.jl'
+write_files:
+  - path: /usr/local/share/gpuaas/julia-setup.jl
+    content: |
+      # Run once by gpuaas.py as user ubuntu: Dagger, CUDA.jl and KernelAbstractions (for the portable
+      # GPU kernels of the examples), with CUDA.jl on the local CUDA toolkit.
+      using Pkg
+      Pkg.add(["CUDA", "Dagger", "KernelAbstractions"])
+      using CUDA
+      CUDA.set_runtime_version!(v"13.0"; local_toolkit=true)

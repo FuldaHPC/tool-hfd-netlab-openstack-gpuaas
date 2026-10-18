@@ -1,0 +1,259 @@
+folder,problem,kind,model,seconds,gflops,status,run
+cuda,pi,seq,"C++",1.277,4.7,ok,1
+cuda,pi,gpu,"CUDA kernel",0.093,64.5,ok,1
+cuda,matmul,seq,"C++",2.048,8.4,ok,1
+cuda,matmul,gpu,"CUDA kernel",0.027,645.3,ok,1
+cuda,pi,seq,"C++",1.441,4.2,ok,2
+cuda,pi,gpu,"CUDA kernel",0.093,64.4,ok,2
+cuda,matmul,seq,"C++",2.133,8.1,ok,2
+cuda,matmul,gpu,"CUDA kernel",0.026,650.0,ok,2
+cuda,pi,seq,"C++",1.452,4.1,ok,3
+cuda,pi,gpu,"CUDA kernel",0.093,64.5,ok,3
+cuda,matmul,seq,"C++",2.059,8.3,ok,3
+cuda,matmul,gpu,"CUDA kernel",0.026,648.9,ok,3
+gcc-offload,pi,seq,"GCC",1.494,4.0,ok,1
+gcc-offload,pi,cpu,"GCC OpenMP, 4 threads",0.461,13.0,ok,1
+gcc-offload,pi,gpu,"GCC OpenMP target",0.092,65.1,ok,1
+gcc-offload,matmul,seq,"GCC",2.151,8.0,ok,1
+gcc-offload,matmul,cpu,"GCC OpenMP, 4 threads",0.909,18.9,ok,1
+gcc-offload,matmul,gpu,"GCC OpenMP target",0.052,328.0,ok,1
+gcc-offload,pi,seq,"gfortran",1.430,4.2,ok,1
+gcc-offload,pi,cpu,"gfortran OpenMP, 4 threads",0.460,13.0,ok,1
+gcc-offload,pi,gpu,"gfortran OpenMP target",0.092,65.1,ok,1
+gcc-offload,pi,gpu,"gfortran OpenACC",0.085,70.9,ok,1
+gcc-offload,matmul,seq,"gfortran",2.099,8.2,ok,1
+gcc-offload,matmul,cpu,"gfortran OpenMP, 4 threads",0.905,19.0,ok,1
+gcc-offload,matmul,gpu,"gfortran OpenMP target",0.049,347.1,ok,1
+gcc-offload,matmul,gpu,"gfortran OpenACC",0.055,313.7,ok,1
+gcc-offload,pi,seq,"GCC",1.494,4.0,ok,2
+gcc-offload,pi,cpu,"GCC OpenMP, 4 threads",0.461,13.0,ok,2
+gcc-offload,pi,gpu,"GCC OpenMP target",0.093,64.4,ok,2
+gcc-offload,matmul,seq,"GCC",2.037,8.4,ok,2
+gcc-offload,matmul,cpu,"GCC OpenMP, 4 threads",0.901,19.1,ok,2
+gcc-offload,matmul,gpu,"GCC OpenMP target",0.048,355.3,ok,2
+gcc-offload,pi,seq,"gfortran",1.408,4.3,ok,2
+gcc-offload,pi,cpu,"gfortran OpenMP, 4 threads",0.460,13.0,ok,2
+gcc-offload,pi,gpu,"gfortran OpenMP target",0.093,64.4,ok,2
+gcc-offload,pi,gpu,"gfortran OpenACC",0.085,70.7,ok,2
+gcc-offload,matmul,seq,"gfortran",2.131,8.1,ok,2
+gcc-offload,matmul,cpu,"gfortran OpenMP, 4 threads",0.892,19.3,ok,2
+gcc-offload,matmul,gpu,"gfortran OpenMP target",0.050,344.0,ok,2
+gcc-offload,matmul,gpu,"gfortran OpenACC",0.055,313.6,ok,2
+gcc-offload,pi,seq,"GCC",1.291,4.6,ok,3
+gcc-offload,pi,cpu,"GCC OpenMP, 4 threads",0.483,12.4,ok,3
+gcc-offload,pi,gpu,"GCC OpenMP target",0.092,65.2,ok,3
+gcc-offload,matmul,seq,"GCC",2.022,8.5,ok,3
+gcc-offload,matmul,cpu,"GCC OpenMP, 4 threads",0.945,18.2,ok,3
+gcc-offload,matmul,gpu,"GCC OpenMP target",0.053,324.4,ok,3
+gcc-offload,pi,seq,"gfortran",1.561,3.8,ok,3
+gcc-offload,pi,cpu,"gfortran OpenMP, 4 threads",0.469,12.8,ok,3
+gcc-offload,pi,gpu,"gfortran OpenMP target",0.092,65.1,ok,3
+gcc-offload,pi,gpu,"gfortran OpenACC",0.090,66.8,ok,3
+gcc-offload,matmul,seq,"gfortran",2.037,8.4,ok,3
+gcc-offload,matmul,cpu,"gfortran OpenMP, 4 threads",0.877,19.6,ok,3
+gcc-offload,matmul,gpu,"gfortran OpenMP target",0.050,344.2,ok,3
+gcc-offload,matmul,gpu,"gfortran OpenACC",0.055,314.0,ok,3
+llvm-offload,pi,seq,"Clang",1.429,4.2,ok,1
+llvm-offload,pi,cpu,"Clang OpenMP, 4 threads",0.457,13.1,ok,1
+llvm-offload,pi,gpu,"Clang OpenMP target",0.144,41.6,ok,1
+llvm-offload,matmul,seq,"Clang",2.339,7.3,ok,1
+llvm-offload,matmul,cpu,"Clang OpenMP, 4 threads",0.838,20.5,ok,1
+llvm-offload,matmul,gpu,"Clang OpenMP target",0.068,251.8,ok,1
+llvm-offload,pi,seq,"flang",1.446,4.1,ok,1
+llvm-offload,pi,cpu,"flang OpenMP, 4 threads",0.475,12.6,ok,1
+llvm-offload,pi,gpu,"flang OpenMP target",0.093,64.2,ok,1
+llvm-offload,matmul,seq,"flang",2.351,7.3,ok,1
+llvm-offload,matmul,cpu,"flang OpenMP, 4 threads",0.832,20.6,ok,1
+llvm-offload,matmul,gpu,"flang OpenMP target",0.291,59.0,ok,1
+llvm-offload,pi,seq,"Clang",1.410,4.3,ok,2
+llvm-offload,pi,cpu,"Clang OpenMP, 4 threads",0.460,13.0,ok,2
+llvm-offload,pi,gpu,"Clang OpenMP target",0.144,41.6,ok,2
+llvm-offload,matmul,seq,"Clang",2.396,7.2,ok,2
+llvm-offload,matmul,cpu,"Clang OpenMP, 4 threads",0.842,20.4,ok,2
+llvm-offload,matmul,gpu,"Clang OpenMP target",0.069,247.5,ok,2
+llvm-offload,pi,seq,"flang",1.427,4.2,ok,2
+llvm-offload,pi,cpu,"flang OpenMP, 4 threads",0.504,11.9,ok,2
+llvm-offload,pi,gpu,"flang OpenMP target",0.093,64.2,ok,2
+llvm-offload,matmul,seq,"flang",2.300,7.5,ok,2
+llvm-offload,matmul,cpu,"flang OpenMP, 4 threads",0.865,19.9,ok,2
+llvm-offload,matmul,gpu,"flang OpenMP target",0.284,60.4,ok,2
+llvm-offload,pi,seq,"Clang",1.477,4.1,ok,3
+llvm-offload,pi,cpu,"Clang OpenMP, 4 threads",0.512,11.7,ok,3
+llvm-offload,pi,gpu,"Clang OpenMP target",0.142,42.1,ok,3
+llvm-offload,matmul,seq,"Clang",2.455,7.0,ok,3
+llvm-offload,matmul,cpu,"Clang OpenMP, 4 threads",0.847,20.3,ok,3
+llvm-offload,matmul,gpu,"Clang OpenMP target",0.075,230.2,ok,3
+llvm-offload,pi,seq,"flang",1.422,4.2,ok,3
+llvm-offload,pi,cpu,"flang OpenMP, 4 threads",0.473,12.7,ok,3
+llvm-offload,pi,gpu,"flang OpenMP target",0.093,64.2,ok,3
+llvm-offload,matmul,seq,"flang",2.445,7.0,ok,3
+llvm-offload,matmul,cpu,"flang OpenMP, 4 threads",0.879,19.5,ok,3
+llvm-offload,matmul,gpu,"flang OpenMP target",0.293,58.7,ok,3
+nvhpc,pi,seq,"nvfortran",0.821,7.3,ok,1
+nvhpc,pi,cpu,"nvfortran OpenMP, 4 threads",0.246,24.4,ok,1
+nvhpc,pi,gpu,"nvfortran OpenMP target",0.141,42.7,ok,1
+nvhpc,pi,gpu,"nvfortran OpenACC",0.085,70.8,ok,1
+nvhpc,pi,gpu,"nvfortran do concurrent",0.085,70.2,ok,1
+nvhpc,pi,gpu,"nvfortran CUDA Fortran",0.087,68.8,ok,1
+nvhpc,matmul,seq,"nvfortran",2.314,7.4,ok,1
+nvhpc,matmul,cpu,"nvfortran OpenMP, 4 threads",0.791,21.7,ok,1
+nvhpc,matmul,gpu,"nvfortran OpenMP target",0.040,424.5,ok,1
+nvhpc,matmul,gpu,"nvfortran OpenACC",0.034,505.3,ok,1
+nvhpc,matmul,gpu,"nvfortran do concurrent",0.086,200.0,ok,1
+nvhpc,matmul,gpu,"nvfortran CUDA Fortran",0.058,295.4,ok,1
+nvhpc,pi,seq,"nvfortran",0.809,7.4,ok,2
+nvhpc,pi,cpu,"nvfortran OpenMP, 4 threads",0.246,24.4,ok,2
+nvhpc,pi,gpu,"nvfortran OpenMP target",0.141,42.6,ok,2
+nvhpc,pi,gpu,"nvfortran OpenACC",0.085,70.8,ok,2
+nvhpc,pi,gpu,"nvfortran do concurrent",0.086,70.0,ok,2
+nvhpc,pi,gpu,"nvfortran CUDA Fortran",0.087,68.8,ok,2
+nvhpc,matmul,seq,"nvfortran",2.323,7.4,ok,2
+nvhpc,matmul,cpu,"nvfortran OpenMP, 4 threads",0.810,21.2,ok,2
+nvhpc,matmul,gpu,"nvfortran OpenMP target",0.030,579.1,ok,2
+nvhpc,matmul,gpu,"nvfortran OpenACC",0.036,481.3,ok,2
+nvhpc,matmul,gpu,"nvfortran do concurrent",0.087,198.4,ok,2
+nvhpc,matmul,gpu,"nvfortran CUDA Fortran",0.061,282.0,ok,2
+nvhpc,pi,seq,"nvfortran",0.813,7.4,ok,3
+nvhpc,pi,cpu,"nvfortran OpenMP, 4 threads",0.247,24.3,ok,3
+nvhpc,pi,gpu,"nvfortran OpenMP target",0.141,42.7,ok,3
+nvhpc,pi,gpu,"nvfortran OpenACC",0.085,70.7,ok,3
+nvhpc,pi,gpu,"nvfortran do concurrent",0.086,70.2,ok,3
+nvhpc,pi,gpu,"nvfortran CUDA Fortran",0.087,68.8,ok,3
+nvhpc,matmul,seq,"nvfortran",2.311,7.4,ok,3
+nvhpc,matmul,cpu,"nvfortran OpenMP, 4 threads",0.802,21.4,ok,3
+nvhpc,matmul,gpu,"nvfortran OpenMP target",0.037,458.3,ok,3
+nvhpc,matmul,gpu,"nvfortran OpenACC",0.035,489.7,ok,3
+nvhpc,matmul,gpu,"nvfortran do concurrent",0.086,200.6,ok,3
+nvhpc,matmul,gpu,"nvfortran CUDA Fortran",0.066,259.1,ok,3
+openmpi,pi,seq,"GCC",1.424,4.2,ok,1
+openmpi,pi,cpu,"MPI, 4 ranks",0.442,13.6,ok,1
+openmpi,pi,gpu,"MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware",0.024,250.5,ok,1
+openmpi,matmul,seq,"GCC",2.116,8.1,ok,1
+openmpi,matmul,cpu,"MPI, 4 ranks",1.017,16.9,ok,1
+openmpi,matmul,gpu,"MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware",0.049,351.9,ok,1
+openmpi,pi,seq,"GCC",1.450,4.1,ok,2
+openmpi,pi,cpu,"MPI, 4 ranks",0.481,12.5,ok,2
+openmpi,pi,gpu,"MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware",0.024,248.7,ok,2
+openmpi,matmul,seq,"GCC",2.089,8.2,ok,2
+openmpi,matmul,cpu,"MPI, 4 ranks",0.980,17.5,ok,2
+openmpi,matmul,gpu,"MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware",0.060,286.6,ok,2
+openmpi,pi,seq,"GCC",1.484,4.0,ok,3
+openmpi,pi,cpu,"MPI, 4 ranks",0.471,12.7,ok,3
+openmpi,pi,gpu,"MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware",0.024,248.6,ok,3
+openmpi,matmul,seq,"GCC",2.113,8.1,ok,3
+openmpi,matmul,cpu,"MPI, 4 ranks",1.027,16.7,ok,3
+openmpi,matmul,gpu,"MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware",0.056,306.4,ok,3
+kokkos,pi,seq,"Kokkos Serial",3.098,1.9,ok,1
+kokkos,pi,cpu,"Kokkos OpenMP, 4 threads",0.886,6.8,ok,1
+kokkos,pi,gpu,"Kokkos Cuda",0.090,66.4,ok,1
+kokkos,matmul,seq,"Kokkos Serial",2.269,7.6,ok,1
+kokkos,matmul,cpu,"Kokkos OpenMP, 4 threads",0.840,20.4,ok,1
+kokkos,matmul,gpu,"Kokkos Cuda",0.027,646.6,ok,1
+kokkos,pi,seq,"Kokkos Serial",2.813,2.1,ok,2
+kokkos,pi,cpu,"Kokkos OpenMP, 4 threads",0.901,6.7,ok,2
+kokkos,pi,gpu,"Kokkos Cuda",0.090,66.4,ok,2
+kokkos,matmul,seq,"Kokkos Serial",2.319,7.4,ok,2
+kokkos,matmul,cpu,"Kokkos OpenMP, 4 threads",0.819,21.0,ok,2
+kokkos,matmul,gpu,"Kokkos Cuda",0.026,660.1,ok,2
+kokkos,pi,seq,"Kokkos Serial",2.809,2.1,ok,3
+kokkos,pi,cpu,"Kokkos OpenMP, 4 threads",0.899,6.7,ok,3
+kokkos,pi,gpu,"Kokkos Cuda",0.090,66.4,ok,3
+kokkos,matmul,seq,"Kokkos Serial",2.337,7.4,ok,3
+kokkos,matmul,cpu,"Kokkos OpenMP, 4 threads",0.831,20.7,ok,3
+kokkos,matmul,gpu,"Kokkos Cuda",0.029,599.6,ok,3
+hpx,pi,seq,"HPX for_loop seq",1.443,4.2,ok,1
+hpx,pi,cpu,"HPX, 4 worker threads, 16 tasks",0.456,13.2,ok,1
+hpx,pi,gpu,"CUDA kernel via HPX cuda_executor",0.093,64.3,ok,1
+hpx,matmul,seq,"HPX for_loop seq",2.436,7.1,ok,1
+hpx,matmul,cpu,"HPX for_loop, 4 worker threads",0.882,19.5,ok,1
+hpx,matmul,gpu,"CUDA kernel via HPX cuda_executor",0.031,557.0,ok,1
+hpx,pi,seq,"HPX for_loop seq",1.459,4.1,ok,2
+hpx,pi,cpu,"HPX, 4 worker threads, 16 tasks",0.459,13.1,ok,2
+hpx,pi,gpu,"CUDA kernel via HPX cuda_executor",0.093,64.2,ok,2
+hpx,matmul,seq,"HPX for_loop seq",2.752,6.2,ok,2
+hpx,matmul,cpu,"HPX for_loop, 4 worker threads",0.901,19.1,ok,2
+hpx,matmul,gpu,"CUDA kernel via HPX cuda_executor",0.031,554.9,ok,2
+hpx,pi,seq,"HPX for_loop seq",1.425,4.2,ok,3
+hpx,pi,cpu,"HPX, 4 worker threads, 16 tasks",0.458,13.1,ok,3
+hpx,pi,gpu,"CUDA kernel via HPX cuda_executor",0.093,64.2,ok,3
+hpx,matmul,seq,"HPX for_loop seq",2.920,5.9,ok,3
+hpx,matmul,cpu,"HPX for_loop, 4 worker threads",0.948,18.1,ok,3
+hpx,matmul,gpu,"CUDA kernel via HPX cuda_executor",0.039,436.7,ok,3
+chapel,pi,seq,"Chapel for",1.445,4.2,ok,1
+chapel,pi,cpu,"Chapel forall, 4 tasks",0.462,13.0,ok,1
+chapel,pi,gpu,"Chapel forall on here.gpus[0]",0.094,63.6,ok,1
+chapel,pi,gpu,"Chapel forall on 4 GPUs",0.031,191.3,ok,1
+chapel,matmul,seq,"Chapel for",2.294,7.5,ok,1
+chapel,matmul,cpu,"Chapel forall, 4 tasks",0.793,21.7,ok,1
+chapel,matmul,gpu,"Chapel forall on here.gpus[0]",0.035,487.1,ok,1
+chapel,matmul,gpu,"Chapel forall on 4 GPUs",0.023,740.8,ok,1
+chapel,pi,seq,"Chapel for",1.472,4.1,ok,2
+chapel,pi,cpu,"Chapel forall, 4 tasks",0.465,12.9,ok,2
+chapel,pi,gpu,"Chapel forall on here.gpus[0]",0.094,63.6,ok,2
+chapel,pi,gpu,"Chapel forall on 4 GPUs",0.032,188.2,ok,2
+chapel,matmul,seq,"Chapel for",2.398,7.2,ok,2
+chapel,matmul,cpu,"Chapel forall, 4 tasks",0.794,21.6,ok,2
+chapel,matmul,gpu,"Chapel forall on here.gpus[0]",0.037,470.3,ok,2
+chapel,matmul,gpu,"Chapel forall on 4 GPUs",0.023,759.3,ok,2
+chapel,pi,seq,"Chapel for",1.444,4.2,ok,3
+chapel,pi,cpu,"Chapel forall, 4 tasks",0.457,13.1,ok,3
+chapel,pi,gpu,"Chapel forall on here.gpus[0]",0.095,63.5,ok,3
+chapel,pi,gpu,"Chapel forall on 4 GPUs",0.033,182.8,ok,3
+chapel,matmul,seq,"Chapel for",2.385,7.2,ok,3
+chapel,matmul,cpu,"Chapel forall, 4 tasks",0.745,23.1,ok,3
+chapel,matmul,gpu,"Chapel forall on here.gpus[0]",0.037,465.7,ok,3
+chapel,matmul,gpu,"Chapel forall on 4 GPUs",0.023,739.1,ok,3
+julia,pi,seq,"Julia",1.453,4.1,ok,1
+julia,pi,cpu,"Dagger, 4 threads, 16 tasks",0.417,14.4,ok,1
+julia,pi,gpu,"CUDA.jl arrays",0.086,70.0,ok,1
+julia,pi,gpu,"CUDA.jl kernel",0.085,70.4,ok,1
+julia,pi,gpu,"KernelAbstractions",0.085,70.5,ok,1
+julia,pi,gpu,"Dagger.Kernel",0.098,61.1,ok,1
+julia,pi,gpu,"Dagger manual on CUDABackend",0.100,59.8,ok,1
+julia,pi,gpu,"Dagger Datadeps on 4 GPUs",0.056,107.8,ok,1
+julia,pi,gpu,"Dagger DArray on 4 GPUs",0.048,125.8,ok,1
+julia,matmul,seq,"Julia",2.180,7.9,ok,1
+julia,matmul,cpu,"Dagger, 4 threads, 16 tasks",0.800,21.5,ok,1
+julia,matmul,gpu,"CUDA.jl arrays: A * B with cuBLAS",0.012,1389.1,ok,1
+julia,matmul,gpu,"CUDA.jl kernel",0.025,689.8,ok,1
+julia,matmul,gpu,"KernelAbstractions",0.025,700.9,ok,1
+julia,matmul,gpu,"Dagger.Kernel",0.062,275.9,ok,1
+julia,matmul,gpu,"Dagger manual on CUDABackend",0.059,290.9,ok,1
+julia,matmul,gpu,"Dagger Datadeps on 4 GPUs",0.049,351.3,ok,1
+julia,matmul,gpu,"Dagger DArray on 4 GPUs: A * B with cuBLAS",0.104,165.8,ok,1
+julia,pi,seq,"Julia",1.448,4.1,ok,2
+julia,pi,cpu,"Dagger, 4 threads, 16 tasks",0.453,13.2,ok,2
+julia,pi,gpu,"CUDA.jl arrays",0.086,69.7,ok,2
+julia,pi,gpu,"CUDA.jl kernel",0.085,70.4,ok,2
+julia,pi,gpu,"KernelAbstractions",0.085,70.3,ok,2
+julia,pi,gpu,"Dagger.Kernel",0.099,60.9,ok,2
+julia,pi,gpu,"Dagger manual on CUDABackend",0.097,61.6,ok,2
+julia,pi,gpu,"Dagger Datadeps on 4 GPUs",0.064,93.7,ok,2
+julia,pi,gpu,"Dagger DArray on 4 GPUs",0.045,132.1,ok,2
+julia,matmul,seq,"Julia",2.284,7.5,ok,2
+julia,matmul,cpu,"Dagger, 4 threads, 16 tasks",0.728,23.6,ok,2
+julia,matmul,gpu,"CUDA.jl arrays: A * B with cuBLAS",0.012,1382.6,ok,2
+julia,matmul,gpu,"CUDA.jl kernel",0.024,715.1,ok,2
+julia,matmul,gpu,"KernelAbstractions",0.024,706.3,ok,2
+julia,matmul,gpu,"Dagger.Kernel",0.060,284.6,ok,2
+julia,matmul,gpu,"Dagger manual on CUDABackend",0.082,209.6,ok,2
+julia,matmul,gpu,"Dagger Datadeps on 4 GPUs",0.049,347.1,ok,2
+julia,matmul,gpu,"Dagger DArray on 4 GPUs: A * B with cuBLAS",0.056,309.5,ok,2
+julia,pi,seq,"Julia",1.452,4.1,ok,3
+julia,pi,cpu,"Dagger, 4 threads, 16 tasks",0.417,14.4,ok,3
+julia,pi,gpu,"CUDA.jl arrays",0.086,69.7,ok,3
+julia,pi,gpu,"CUDA.jl kernel",0.086,70.1,ok,3
+julia,pi,gpu,"KernelAbstractions",0.085,70.2,ok,3
+julia,pi,gpu,"Dagger.Kernel",0.099,60.7,ok,3
+julia,pi,gpu,"Dagger manual on CUDABackend",0.100,59.7,ok,3
+julia,pi,gpu,"Dagger Datadeps on 4 GPUs",0.056,107.7,ok,3
+julia,pi,gpu,"Dagger DArray on 4 GPUs",0.048,126.2,ok,3
+julia,matmul,seq,"Julia",2.264,7.6,ok,3
+julia,matmul,cpu,"Dagger, 4 threads, 16 tasks",0.726,23.7,ok,3
+julia,matmul,gpu,"CUDA.jl arrays: A * B with cuBLAS",0.012,1394.3,ok,3
+julia,matmul,gpu,"CUDA.jl kernel",0.024,714.4,ok,3
+julia,matmul,gpu,"KernelAbstractions",0.025,690.4,ok,3
+julia,matmul,gpu,"Dagger.Kernel",0.088,195.4,ok,3
+julia,matmul,gpu,"Dagger manual on CUDABackend",0.084,205.3,ok,3
+julia,matmul,gpu,"Dagger Datadeps on 4 GPUs",0.038,451.6,ok,3
+julia,matmul,gpu,"Dagger DArray on 4 GPUs: A * B with cuBLAS",0.056,307.6,ok,3

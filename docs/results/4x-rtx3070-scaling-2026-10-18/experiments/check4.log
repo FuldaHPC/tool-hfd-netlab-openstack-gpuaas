@@ -1,0 +1,52 @@
+Loading openmpi/5.0.11
+  Loading requirement: cuda/13.0.2
+== MPI, GPUs 0, 1 ranks
+GPU (MPI, 1 ranks on 1 GPU with CUDA kernels, CUDA-aware): pi = 3.141592653590 (error 8.9e-16) in 0.093 s (64.3 GFLOP/s)
+GPU (MPI, 1 ranks on 1 GPU with CUDA kernels, CUDA-aware): 2048x2048 matrix product correct in 0.042 s (409.2 GFLOP/s)
+== MPI, GPUs 0,1, 2 ranks
+GPU (MPI, 2 ranks on 2 GPUs with CUDA kernels, CUDA-aware): pi = 3.141592653590 (error 8.9e-16) in 0.047 s (128.0 GFLOP/s)
+GPU (MPI, 2 ranks on 2 GPUs with CUDA kernels, CUDA-aware): 2048x2048 matrix product correct in 0.047 s (366.7 GFLOP/s)
+== MPI, GPUs 0,1,2, 3 ranks
+GPU (MPI, 3 ranks on 3 GPUs with CUDA kernels, CUDA-aware): pi = 3.141592653590 (error 3.1e-15) in 0.032 s (189.9 GFLOP/s)
+GPU (MPI, 3 ranks on 3 GPUs with CUDA kernels, CUDA-aware): 2048x2048 matrix product correct in 0.055 s (311.0 GFLOP/s)
+== MPI, GPUs 0,1,2,3, 4 ranks
+GPU (MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware): pi = 3.141592653590 (error 1.3e-15) in 0.024 s (246.7 GFLOP/s)
+GPU (MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware): 2048x2048 matrix product correct in 0.059 s (291.2 GFLOP/s)
+== MPI, make run uses: 1 x np 4 for pi_gpu
+Loading chapel/2.10.0
+  Loading requirement: cuda/13.0.2 llvm/22.1.8
+== Chapel, GPUs 0
+GPU (Chapel forall on 1 GPU): pi = 3.141592653590 (error 0.0e+00) in 0.094 s (63.9 GFLOP/s)
+GPU (Chapel forall on 1 GPU): 2048x2048 matrix product correct in 0.040 s (428.7 GFLOP/s)
+== Chapel, GPUs 0,1
+GPU (Chapel forall on 2 GPUs): pi = 3.141592653590 (error 0.0e+00) in 0.050 s (119.4 GFLOP/s)
+GPU (Chapel forall on 2 GPUs): 2048x2048 matrix product correct in 0.030 s (567.7 GFLOP/s)
+== Chapel, GPUs 0,1,2
+GPU (Chapel forall on 3 GPUs): pi = 3.141592653590 (error 0.0e+00) in 0.040 s (149.9 GFLOP/s)
+GPU (Chapel forall on 3 GPUs): 2048x2048 matrix product correct in 0.023 s (754.6 GFLOP/s)
+== Chapel, GPUs 0,1,2,3
+GPU (Chapel forall on 4 GPUs): pi = 3.141592653590 (error 4.4e-16) in 0.033 s (179.7 GFLOP/s)
+GPU (Chapel forall on 4 GPUs): 2048x2048 matrix product correct in 0.021 s (812.0 GFLOP/s)
+== Datadeps placement, 4 GPUs, n = 2048
+threads 4, GPUs 4, n 2048, auto
+run 1: total 0.11 s = prepare 0.013 + region 0.073 + gather 0.024; kernels: GPU 2 0.025-0.029 s, GPU 0 0.03-0.037 s, GPU 1 0.033-0.037 s, GPU 3 0.039-0.043 s
+run 2: total 0.101 s = prepare 0.018 + region 0.079 + gather 0.004; kernels: GPU 2 0.035-0.039 s, GPU 0 0.035-0.039 s, GPU 1 0.039-0.046 s, GPU 3 0.043-0.047 s
+run 3: total 0.105 s = prepare 0.027 + region 0.073 + gather 0.004; kernels: GPU 2 0.044-0.048 s, GPU 0 0.044-0.048 s, GPU 1 0.052-0.058 s, GPU 3 0.056-0.059 s
+check: 2048x2048 matrix product correct in 1.000 s (17.2 GFLOP/s)
+== Datadeps placement, 4 GPUs, n = 8192
+threads 4, GPUs 4, n 8192, auto
+run 1: total 1.224 s = prepare 0.217 + region 0.802 + gather 0.205; kernels: GPU 2 0.365-0.565 s, GPU 0 0.425-0.629 s, GPU 1 0.475-0.677 s, GPU 3 0.529-0.78 s
+run 2: total 1.4 s = prepare 0.376 + region 0.953 + gather 0.071; kernels: GPU 2 0.542-0.745 s, GPU 0 0.586-0.789 s, GPU 1 0.636-0.837 s, GPU 3 0.685-0.886 s
+run 3: total 1.055 s = prepare 0.246 + region 0.753 + gather 0.056; kernels: GPU 2 0.416-0.62 s, GPU 0 0.458-0.663 s, GPU 1 0.514-0.716 s, GPU 3 0.57-0.771 s
+check: 8192x8192 matrix product correct in 1.000 s (1099.5 GFLOP/s)
+== Julia, GPUs 0,1,2
+GPU (Dagger Datadeps on 3 GPUs, NVIDIA GeForce RTX 3070): pi = 3.141592653590 (error 4.4e-16) in 0.064 s (93.9 GFLOP/s)
+GPU (Dagger Datadeps on 3 GPUs, NVIDIA GeForce RTX 3070): 2048x2048 matrix product correct in 0.046 s (375.2 GFLOP/s)
+GPU (Dagger DArray on 3 GPUs, NVIDIA GeForce RTX 3070): pi = 3.141592653590 (error 4.4e-16) in 0.077 s (78.1 GFLOP/s)
+GPU (Dagger DArray on 3 GPUs: A * B with cuBLAS, NVIDIA GeForce RTX 3070): 2048x2048 matrix product correct in 0.092 s (186.2 GFLOP/s)
+== Julia, GPUs 0,1,2,3
+GPU (Dagger Datadeps on 4 GPUs, NVIDIA GeForce RTX 3070): pi = 3.141592653590 (error 8.9e-16) in 0.075 s (80.1 GFLOP/s)
+GPU (Dagger Datadeps on 4 GPUs, NVIDIA GeForce RTX 3070): 2048x2048 matrix product correct in 0.047 s (361.7 GFLOP/s)
+GPU (Dagger DArray on 4 GPUs, NVIDIA GeForce RTX 3070): pi = 3.141592653590 (error 4.4e-16) in 0.047 s (127.9 GFLOP/s)
+GPU (Dagger DArray on 4 GPUs: A * B with cuBLAS, NVIDIA GeForce RTX 3070): 2048x2048 matrix product correct in 0.101 s (170.2 GFLOP/s)
+== done

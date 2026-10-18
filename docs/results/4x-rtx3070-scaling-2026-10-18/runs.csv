@@ -1,0 +1,178 @@
+problem,n,program,gpus,run,seconds,gflops,status
+pi,0,CUDA kernel,1,1,0.093,64.5,ok
+pi,0,CUDA kernel,1,2,0.089,67.6,ok
+pi,0,CUDA kernel,1,3,0.087,68.8,ok
+pi,0,Chapel pi_gpu,1,1,0.088,68.2,ok
+pi,0,Chapel pi_gpu,1,2,0.087,68.7,ok
+pi,0,Chapel pi_gpu,1,3,0.088,68.5,ok
+pi,0,CUDA.jl kernel,1,1,0.085,70.5,ok
+pi,0,CUDA.jl kernel,1,2,0.085,70.5,ok
+pi,0,CUDA.jl kernel,1,3,0.085,70.4,ok
+pi,0,MPI,1,1,0.087,68.7,ok
+pi,0,MPI,1,2,0.087,68.7,ok
+pi,0,MPI,1,3,0.087,68.7,ok
+pi,0,Chapel pi_gpus,1,1,0.088,68.2,ok
+pi,0,Chapel pi_gpus,1,2,0.089,67.7,ok
+pi,0,Chapel pi_gpus,1,3,0.088,68.3,ok
+pi,0,Dagger Datadeps,1,1,0.105,57.3,ok
+pi,0,Dagger Datadeps,1,2,0.099,60.5,ok
+pi,0,Dagger Datadeps,1,3,0.098,61.2,ok
+pi,0,Dagger DArray,1,1,0.101,59.7,ok
+pi,0,Dagger DArray,1,2,0.097,61.6,ok
+pi,0,Dagger DArray,1,3,0.095,63.3,ok
+pi,0,MPI,2,1,0.047,127.9,ok
+pi,0,MPI,2,2,0.047,127.5,ok
+pi,0,MPI,2,3,0.047,128.0,ok
+pi,0,Chapel pi_gpus,2,1,0.052,115.6,ok
+pi,0,Chapel pi_gpus,2,2,0.052,115.6,ok
+pi,0,Chapel pi_gpus,2,3,0.051,116.8,ok
+pi,0,Dagger Datadeps,2,1,0.057,105.1,ok
+pi,0,Dagger Datadeps,2,2,0.058,103.5,ok
+pi,0,Dagger Datadeps,2,3,0.071,84.5,ok
+pi,0,Dagger DArray,2,1,0.056,108.0,ok
+pi,0,Dagger DArray,2,2,0.058,104.2,ok
+pi,0,Dagger DArray,2,3,0.055,109.5,ok
+pi,0,MPI,3,1,0.032,189.6,ok
+pi,0,MPI,3,2,0.032,189.9,ok
+pi,0,MPI,3,3,0.032,190.2,ok
+pi,0,Chapel pi_gpus,3,1,0.037,160.3,ok
+pi,0,Chapel pi_gpus,3,2,0.038,159.4,ok
+pi,0,Chapel pi_gpus,3,3,0.038,159.0,ok
+pi,0,Dagger Datadeps,3,1,0.046,129.5,ok
+pi,0,Dagger Datadeps,3,2,0.061,98.9,ok
+pi,0,Dagger Datadeps,3,3,0.048,125.0,ok
+pi,0,Dagger DArray,3,1,0.052,115.1,ok
+pi,0,Dagger DArray,3,2,0.051,118.4,ok
+pi,0,Dagger DArray,3,3,0.049,122.8,ok
+pi,0,MPI,4,1,0.024,246.8,ok
+pi,0,MPI,4,2,0.024,249.1,ok
+pi,0,MPI,4,3,0.024,248.5,ok
+pi,0,Chapel pi_gpus,4,1,0.034,178.7,ok
+pi,0,Chapel pi_gpus,4,2,0.033,180.4,ok
+pi,0,Chapel pi_gpus,4,3,0.033,184.1,ok
+pi,0,Dagger Datadeps,4,1,0.062,97.4,ok
+pi,0,Dagger Datadeps,4,2,0.043,139.7,ok
+pi,0,Dagger Datadeps,4,3,0.070,85.5,ok
+pi,0,Dagger DArray,4,1,0.048,124.8,ok
+pi,0,Dagger DArray,4,2,0.046,130.5,ok
+pi,0,Dagger DArray,4,3,0.048,126.2,ok
+matmul,2048,CUDA kernel,1,1,0.027,631.3,ok
+matmul,2048,CUDA kernel,1,2,0.030,581.0,ok
+matmul,2048,CUDA kernel,1,3,0.030,580.9,ok
+matmul,2048,Chapel matmul_gpu,1,1,0.040,430.3,ok
+matmul,2048,Chapel matmul_gpu,1,2,0.042,411.8,ok
+matmul,2048,Chapel matmul_gpu,1,3,0.039,435.0,ok
+matmul,2048,CUDA.jl kernel,1,1,0.024,702.9,ok
+matmul,2048,CUDA.jl kernel,1,2,0.025,699.5,ok
+matmul,2048,CUDA.jl kernel,1,3,0.024,702.0,ok
+matmul,2048,CUDA.jl cuBLAS,1,1,0.013,1328.1,ok
+matmul,2048,CUDA.jl cuBLAS,1,2,0.013,1365.6,ok
+matmul,2048,CUDA.jl cuBLAS,1,3,0.012,1398.8,ok
+matmul,2048,MPI,1,1,0.037,460.5,ok
+matmul,2048,MPI,1,2,0.037,461.4,ok
+matmul,2048,MPI,1,3,0.039,438.4,ok
+matmul,2048,Chapel matmul_gpus,1,1,0.038,457.9,ok
+matmul,2048,Chapel matmul_gpus,1,2,0.040,428.7,ok
+matmul,2048,Chapel matmul_gpus,1,3,0.043,402.7,ok
+matmul,2048,Dagger Datadeps,1,1,0.056,306.1,ok
+matmul,2048,Dagger Datadeps,1,2,0.051,339.4,ok
+matmul,2048,Dagger Datadeps,1,3,0.053,324.6,ok
+matmul,2048,Dagger DArray,1,1,0.059,292.9,ok
+matmul,2048,Dagger DArray,1,2,0.045,383.4,ok
+matmul,2048,Dagger DArray,1,3,0.064,269.5,ok
+matmul,2048,MPI,2,1,0.048,354.8,ok
+matmul,2048,MPI,2,2,0.048,359.9,ok
+matmul,2048,MPI,2,3,0.047,363.0,ok
+matmul,2048,Chapel matmul_gpus,2,1,0.028,609.2,ok
+matmul,2048,Chapel matmul_gpus,2,2,0.028,622.9,ok
+matmul,2048,Chapel matmul_gpus,2,3,0.028,621.2,ok
+matmul,2048,Dagger Datadeps,2,1,0.043,401.8,ok
+matmul,2048,Dagger Datadeps,2,2,0.059,290.5,ok
+matmul,2048,Dagger Datadeps,2,3,0.052,332.4,ok
+matmul,2048,Dagger DArray,2,1,0.083,206.8,ok
+matmul,2048,Dagger DArray,2,2,0.087,197.1,ok
+matmul,2048,Dagger DArray,2,3,0.045,379.8,ok
+matmul,2048,MPI,3,1,0.054,318.6,ok
+matmul,2048,MPI,3,2,0.055,313.9,ok
+matmul,2048,MPI,3,3,0.053,322.4,ok
+matmul,2048,Chapel matmul_gpus,3,1,0.023,762.8,ok
+matmul,2048,Chapel matmul_gpus,3,2,0.023,743.6,ok
+matmul,2048,Chapel matmul_gpus,3,3,0.023,752.2,ok
+matmul,2048,Dagger Datadeps,3,1,0.045,384.1,ok
+matmul,2048,Dagger Datadeps,3,2,0.085,202.6,ok
+matmul,2048,Dagger Datadeps,3,3,0.050,346.6,ok
+matmul,2048,Dagger DArray,3,1,0.065,262.7,ok
+matmul,2048,Dagger DArray,3,2,0.099,172.8,ok
+matmul,2048,Dagger DArray,3,3,0.058,296.0,ok
+matmul,2048,MPI,4,1,0.061,280.1,ok
+matmul,2048,MPI,4,2,0.052,330.6,ok
+matmul,2048,MPI,4,3,0.052,332.9,ok
+matmul,2048,Chapel matmul_gpus,4,1,0.021,819.7,ok
+matmul,2048,Chapel matmul_gpus,4,2,0.021,817.9,ok
+matmul,2048,Chapel matmul_gpus,4,3,0.026,651.0,ok
+matmul,2048,Dagger Datadeps,4,1,0.055,313.2,ok
+matmul,2048,Dagger Datadeps,4,2,0.090,191.6,ok
+matmul,2048,Dagger Datadeps,4,3,0.099,174.1,ok
+matmul,2048,Dagger DArray,4,1,0.059,289.2,ok
+matmul,2048,Dagger DArray,4,2,0.096,178.8,ok
+matmul,2048,Dagger DArray,4,3,0.071,243.4,ok
+matmul,8192,CUDA kernel,1,1,1.037,1060.0,ok
+matmul,8192,CUDA kernel,1,2,1.024,1073.6,ok
+matmul,8192,CUDA kernel,1,3,1.026,1071.5,ok
+matmul,8192,Chapel matmul_gpu,1,1,5.228,210.3,ok
+matmul,8192,Chapel matmul_gpu,1,2,5.220,210.6,ok
+matmul,8192,Chapel matmul_gpu,1,3,5.238,209.9,ok
+matmul,8192,CUDA.jl kernel,1,1,0.976,1126.7,ok
+matmul,8192,CUDA.jl kernel,1,2,0.981,1121.1,ok
+matmul,8192,CUDA.jl kernel,1,3,0.980,1121.8,ok
+matmul,8192,CUDA.jl cuBLAS,1,1,0.237,4647.3,ok
+matmul,8192,CUDA.jl cuBLAS,1,2,0.243,4531.1,ok
+matmul,8192,CUDA.jl cuBLAS,1,3,0.247,4448.6,ok
+matmul,8192,MPI,1,1,1.165,943.5,ok
+matmul,8192,MPI,1,2,1.159,948.3,ok
+matmul,8192,MPI,1,3,1.146,959.8,ok
+matmul,8192,Chapel matmul_gpus,1,1,5.322,206.6,ok
+matmul,8192,Chapel matmul_gpus,1,2,5.333,206.2,ok
+matmul,8192,Chapel matmul_gpus,1,3,5.334,206.1,ok
+matmul,8192,Dagger Datadeps,1,1,1.245,882.9,ok
+matmul,8192,Dagger Datadeps,1,2,1.191,923.1,ok
+matmul,8192,Dagger Datadeps,1,3,1.250,879.7,ok
+matmul,8192,Dagger DArray,1,1,1.073,1024.7,ok
+matmul,8192,Dagger DArray,1,2,0.890,1234.9,ok
+matmul,8192,Dagger DArray,1,3,1.013,1085.2,ok
+matmul,8192,MPI,2,1,1.033,1064.6,ok
+matmul,8192,MPI,2,2,0.978,1123.8,ok
+matmul,8192,MPI,2,3,0.954,1152.9,ok
+matmul,8192,Chapel matmul_gpus,2,1,2.699,407.4,ok
+matmul,8192,Chapel matmul_gpus,2,2,2.700,407.3,ok
+matmul,8192,Chapel matmul_gpus,2,3,2.696,407.8,ok
+matmul,8192,Dagger Datadeps,2,1,0.922,1192.5,ok
+matmul,8192,Dagger Datadeps,2,2,0.901,1220.4,ok
+matmul,8192,Dagger Datadeps,2,3,0.862,1276.1,ok
+matmul,8192,Dagger DArray,2,1,0.953,1154.1,ok
+matmul,8192,Dagger DArray,2,2,1.203,913.7,ok
+matmul,8192,Dagger DArray,2,3,1.028,1069.4,ok
+matmul,8192,MPI,3,1,0.942,1166.7,ok
+matmul,8192,MPI,3,2,0.886,1240.4,ok
+matmul,8192,MPI,3,3,0.951,1156.4,ok
+matmul,8192,Chapel matmul_gpus,3,1,1.824,602.9,ok
+matmul,8192,Chapel matmul_gpus,3,2,1.823,603.1,ok
+matmul,8192,Chapel matmul_gpus,3,3,1.819,604.4,ok
+matmul,8192,Dagger Datadeps,3,1,0.724,1518.4,ok
+matmul,8192,Dagger Datadeps,3,2,0.740,1486.5,ok
+matmul,8192,Dagger Datadeps,3,3,0.807,1362.6,ok
+matmul,8192,Dagger DArray,3,1,1.166,943.3,ok
+matmul,8192,Dagger DArray,3,2,1.136,968.3,ok
+matmul,8192,Dagger DArray,3,3,1.189,924.5,ok
+matmul,8192,MPI,4,1,0.924,1189.8,ok
+matmul,8192,MPI,4,2,0.966,1137.9,ok
+matmul,8192,MPI,4,3,0.963,1141.2,ok
+matmul,8192,Chapel matmul_gpus,4,1,1.398,786.2,ok
+matmul,8192,Chapel matmul_gpus,4,2,1.388,792.0,ok
+matmul,8192,Chapel matmul_gpus,4,3,1.392,790.0,ok
+matmul,8192,Dagger Datadeps,4,1,0.799,1376.1,ok
+matmul,8192,Dagger Datadeps,4,2,0.715,1537.6,ok
+matmul,8192,Dagger Datadeps,4,3,0.640,1716.7,ok
+matmul,8192,Dagger DArray,4,1,1.306,842.2,ok
+matmul,8192,Dagger DArray,4,2,0.981,1121.2,ok
+matmul,8192,Dagger DArray,4,3,1.124,978.2,ok

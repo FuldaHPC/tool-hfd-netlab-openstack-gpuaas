@@ -1,0 +1,62 @@
+! pi with the midpoint rule in a CUDA Fortran kernel: every thread sums every (grid size)-th step,
+! each block adds up its threads in shared memory and adds that to the result with one atomicAdd
+! (the same as ../cuda/pi_gpu.cu). The time includes allocating the GPU memory.
+module pi_kernels
+  use cudafor
+  use iso_fortran_env, only: int64, real64
+  implicit none
+contains
+  attributes(global) subroutine pi_kernel(n, h, total)
+    integer(int64), value :: n
+    real(real64), value :: h
+    real(real64), device :: total(1)
+    real(real64), shared :: block(256)
+    integer(int64) :: i
+    integer :: half
+    real(real64) :: x, s, old
+    s = 0
+    i = (blockIdx%x - 1) * int(blockDim%x, int64) + threadIdx%x - 1
+    do while (i < n)
+      x = (i + 0.5_real64) * h
+      s = s + 4 / (1 + x * x)
+      i = i + int(gridDim%x, int64) * blockDim%x
+    end do
+    block(threadIdx%x) = s
+    call syncthreads()
+    half = blockDim%x / 2
+    do while (half > 0)
+      if (threadIdx%x <= half) block(threadIdx%x) = block(threadIdx%x) + block(threadIdx%x + half)
+      call syncthreads()
+      half = half / 2
+    end do
+    if (threadIdx%x == 1) old = atomicadd(total(1), block(1))
+  end subroutine
+end module
+
+program pi_cuf
+  use common
+  use pi_kernels
+  implicit none
+  real(real64) :: pi, start, seconds
+  pi = pi_cuda(1000_int64)  ! warm-up: creates the CUDA context and loads the kernel
+  start = seconds_now()
+  pi = pi_cuda(pi_steps)
+  seconds = seconds_now() - start
+  if (pi_report("GPU (" // trim(compiler()) // " CUDA Fortran)", pi, pi_steps, seconds) /= 0) error stop 1
+
+contains
+
+  real(real64) function pi_cuda(n)
+    integer(int64), intent(in) :: n
+    real(real64), device, allocatable :: total(:)
+    real(real64) :: h, s(1)
+    h = 1.0_real64 / n
+    allocate (total(1))
+    total = 0
+    call pi_kernel<<<1024, 256>>>(n, h, total)
+    s = total  ! copies back and waits for the kernel
+    deallocate (total)
+    pi_cuda = h * s(1)
+  end function
+
+end program

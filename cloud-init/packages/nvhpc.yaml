@@ -1,0 +1,22 @@
+# NVIDIA HPC SDK from NVIDIA's apt repository: nvc, nvc++ and nvfortran with OpenACC, OpenMP offloading,
+# standard parallelism (do concurrent, -stdpar=gpu) and CUDA Fortran, with its own CUDA and MPI.
+# About 5 GB download and 15 GB on disk (version 26.9), so it needs a medium or larger flavor.
+# Not in the PATH by default, because its nvcc and MPI would shadow the cuda and openmpi packages:
+# "module load nvhpc" (NVIDIA's modulefiles, registered with Environment Modules) sets it up.
+gpuaas:
+  title: NVIDIA HPC SDK (nvc, nvfortran)
+  group: Basics
+  order: 25
+  disk: 20  # 15 GB installed, plus 5 GB of packages downloaded during the installation
+  os:
+    ubuntu-26.04: tested
+    ubuntu-24.04: tested
+packages:
+  - environment-modules
+runcmd:
+  - curl -fsSL https://developer.download.nvidia.com/hpc-sdk/ubuntu/DEB-GPG-KEY-NVIDIA-HPC-SDK | gpg --dearmor --yes -o /usr/share/keyrings/nvidia-hpcsdk-archive-keyring.gpg
+  - echo "deb [signed-by=/usr/share/keyrings/nvidia-hpcsdk-archive-keyring.gpg] https://developer.download.nvidia.com/hpc-sdk/ubuntu/amd64 /" > /etc/apt/sources.list.d/nvhpc.list
+  - apt-get -o DPkg::Lock::Timeout=600 update
+  - DEBIAN_FRONTEND=noninteractive apt-get -o DPkg::Lock::Timeout=600 install -y nvhpc-26-9
+  - apt-get clean  # the 5 GB of downloaded packages
+  - grep -qx /opt/nvidia/hpc_sdk/modulefiles /etc/environment-modules/modulespath || echo /opt/nvidia/hpc_sdk/modulefiles >> /etc/environment-modules/modulespath

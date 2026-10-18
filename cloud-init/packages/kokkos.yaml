@@ -1,0 +1,14 @@
+# Kokkos with the CUDA backend for the GPU of the instance and the OpenMP backend for the CPU cores
+# (default host execution space) and Serial (for the sequential examples), built with Spack. Built with CMake's
+# CUDA language support (+cmake_lang), so no nvcc_wrapper package is needed; applications enable
+# the CUDA language and compile their Kokkos sources as CUDA (see workspace/kokkos/CMakeLists.txt).
+gpuaas:
+  title: Kokkos with CUDA and OpenMP
+  group: HPC (Spack, Ubuntu 24.04)
+  order: 52
+  requires: [spack]
+  long: true
+  os:
+    ubuntu-24.04: tested
+    ubuntu-26.04: "no: part of the Spack HPC stack (CUDA 13.0)"
+  build: gpuaas-spack kokkos +cuda +openmp +serial +cmake_lang cuda_arch=@CUDA_ARCH@

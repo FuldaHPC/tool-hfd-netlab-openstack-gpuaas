@@ -1,0 +1,14 @@
+# Open MPI, CUDA-aware, built with Spack. No rsh launcher (one node needs no remote start), which
+# avoids OpenSSH and Kerberos as dependencies. hwloc, PMIx and libevent come from Spack: Open MPI's
+# bundled hwloc 2.7.1 fails to build with CUDA (OpenCL plugin: "cannot determine absolute
+# directory name of 'no/opencl/lib/'", seen 2026-10-16).
+gpuaas:
+  title: Open MPI 5, CUDA-aware
+  group: HPC (Spack, Ubuntu 24.04)
+  order: 51
+  requires: [spack]
+  long: true
+  os:
+    ubuntu-24.04: tested
+    ubuntu-26.04: "no: part of the Spack HPC stack (CUDA 13.0)"
+  build: gpuaas-spack openmpi +cuda cuda_arch=@CUDA_ARCH@ ~rsh

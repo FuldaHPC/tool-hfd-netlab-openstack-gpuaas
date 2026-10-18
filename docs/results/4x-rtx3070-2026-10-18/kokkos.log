@@ -1,0 +1,185 @@
+== run 1
+Loading kokkos/5.2.2
+  Loading requirement: cuda/13.0.2
+-- The CXX compiler identification is GNU 13.3.0
+-- The CUDA compiler identification is NVIDIA 13.0.88
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting CUDA compiler ABI info
+-- Detecting CUDA compiler ABI info - done
+-- Check for working CUDA compiler: /opt/spack/opt/spack/linux-x86_64_v3/cuda-13.0.2-doz2i7bovk2rswfbes2aiif2nb35hh53/bin/nvcc - skipped
+-- Detecting CUDA compile features
+-- Detecting CUDA compile features - done
+-- Found CUDAToolkit: /opt/spack/opt/spack/linux-x86_64_v3/cuda-13.0.2-doz2i7bovk2rswfbes2aiif2nb35hh53/targets/x86_64-linux/include (found version "13.0.88") 
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found OpenMP_CXX: -fopenmp (found version "4.5") 
+-- Found OpenMP: TRUE (found version "4.5") found components: CXX 
+-- Enabled Kokkos devices: OPENMP;SERIAL;CUDA
+CMake Warning at /opt/spack/opt/spack/linux-x86_64_v3/kokkos-5.2.2-7o6itc2hdhismjbq2w5vuugdijg3knsc/lib/cmake/Kokkos/KokkosConfigCommon.cmake:69 (message):
+  The installed Kokkos configuration does not support CXX extensions.
+  Forcing -DCMAKE_CXX_EXTENSIONS=Off
+Call Stack (most recent call first):
+  /opt/spack/opt/spack/linux-x86_64_v3/kokkos-5.2.2-7o6itc2hdhismjbq2w5vuugdijg3knsc/lib/cmake/Kokkos/KokkosConfig.cmake:44 (include)
+  CMakeLists.txt:6 (find_package)
+
+
+-- Configuring done (5.6s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/gpuaas-4gpu-runall/workspace/kokkos/build
+[  8%] Building CUDA object CMakeFiles/pi_seq.dir/pi_seq.cpp.o
+[ 16%] Linking CUDA executable pi_seq
+[ 16%] Built target pi_seq
+[ 25%] Building CUDA object CMakeFiles/pi_cpu.dir/pi_cpu.cpp.o
+[ 33%] Linking CUDA executable pi_cpu
+[ 33%] Built target pi_cpu
+[ 41%] Building CUDA object CMakeFiles/pi_gpu.dir/pi_gpu.cpp.o
+[ 50%] Linking CUDA executable pi_gpu
+[ 50%] Built target pi_gpu
+[ 58%] Building CUDA object CMakeFiles/matmul_seq.dir/matmul_seq.cpp.o
+[ 66%] Linking CUDA executable matmul_seq
+[ 66%] Built target matmul_seq
+[ 75%] Building CUDA object CMakeFiles/matmul_cpu.dir/matmul_cpu.cpp.o
+[ 83%] Linking CUDA executable matmul_cpu
+[ 83%] Built target matmul_cpu
+[ 91%] Building CUDA object CMakeFiles/matmul_gpu.dir/matmul_gpu.cpp.o
+[100%] Linking CUDA executable matmul_gpu
+[100%] Built target matmul_gpu
+Kokkos::OpenMP::initialize WARNING: OMP_PROC_BIND environment variable not set
+  In general, for best performance with OpenMP 4.0 or better set OMP_PROC_BIND=spread and OMP_PLACES=threads
+  For best performance with OpenMP 3.1 set OMP_PROC_BIND=true
+  For unit testing set OMP_PROC_BIND=false
+
+CPU sequential (Kokkos Serial): pi = 3.141592653590 (error 1.8e-13) in 3.098 s (1.9 GFLOP/s)
+Kokkos::OpenMP::initialize WARNING: OMP_PROC_BIND environment variable not set
+  In general, for best performance with OpenMP 4.0 or better set OMP_PROC_BIND=spread and OMP_PLACES=threads
+  For best performance with OpenMP 3.1 set OMP_PROC_BIND=true
+  For unit testing set OMP_PROC_BIND=false
+
+CPU (Kokkos OpenMP, 4 threads): pi = 3.141592653590 (error 3.2e-14) in 0.886 s (6.8 GFLOP/s)
+Kokkos::OpenMP::initialize WARNING: OMP_PROC_BIND environment variable not set
+  In general, for best performance with OpenMP 4.0 or better set OMP_PROC_BIND=spread and OMP_PLACES=threads
+  For best performance with OpenMP 3.1 set OMP_PROC_BIND=true
+  For unit testing set OMP_PROC_BIND=false
+
+GPU (Kokkos Cuda): pi = 3.141592653590 (error 4.4e-16) in 0.090 s (66.4 GFLOP/s)
+Kokkos::OpenMP::initialize WARNING: OMP_PROC_BIND environment variable not set
+  In general, for best performance with OpenMP 4.0 or better set OMP_PROC_BIND=spread and OMP_PLACES=threads
+  For best performance with OpenMP 3.1 set OMP_PROC_BIND=true
+  For unit testing set OMP_PROC_BIND=false
+
+CPU sequential (Kokkos Serial): 2048x2048 matrix product correct in 2.269 s (7.6 GFLOP/s)
+Kokkos::OpenMP::initialize WARNING: OMP_PROC_BIND environment variable not set
+  In general, for best performance with OpenMP 4.0 or better set OMP_PROC_BIND=spread and OMP_PLACES=threads
+  For best performance with OpenMP 3.1 set OMP_PROC_BIND=true
+  For unit testing set OMP_PROC_BIND=false
+
+CPU (Kokkos OpenMP, 4 threads): 2048x2048 matrix product correct in 0.840 s (20.4 GFLOP/s)
+Kokkos::OpenMP::initialize WARNING: OMP_PROC_BIND environment variable not set
+  In general, for best performance with OpenMP 4.0 or better set OMP_PROC_BIND=spread and OMP_PLACES=threads
+  For best performance with OpenMP 3.1 set OMP_PROC_BIND=true
+  For unit testing set OMP_PROC_BIND=false
+
+GPU (Kokkos Cuda): 2048x2048 matrix product correct in 0.027 s (646.6 GFLOP/s)
+== run 2
+Loading kokkos/5.2.2
+  Loading requirement: cuda/13.0.2
+-- Enabled Kokkos devices: OPENMP;SERIAL;CUDA
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/gpuaas-4gpu-runall/workspace/kokkos/build
+[ 16%] Built target pi_seq
+[ 33%] Built target pi_cpu
+[ 50%] Built target pi_gpu
+[ 66%] Built target matmul_seq
+[ 83%] Built target matmul_cpu
+[100%] Built target matmul_gpu
+Kokkos::OpenMP::initialize WARNING: OMP_PROC_BIND environment variable not set
+  In general, for best performance with OpenMP 4.0 or better set OMP_PROC_BIND=spread and OMP_PLACES=threads
+  For best performance with OpenMP 3.1 set OMP_PROC_BIND=true
+  For unit testing set OMP_PROC_BIND=false
+
+CPU sequential (Kokkos Serial): pi = 3.141592653590 (error 1.8e-13) in 2.813 s (2.1 GFLOP/s)
+Kokkos::OpenMP::initialize WARNING: OMP_PROC_BIND environment variable not set
+  In general, for best performance with OpenMP 4.0 or better set OMP_PROC_BIND=spread and OMP_PLACES=threads
+  For best performance with OpenMP 3.1 set OMP_PROC_BIND=true
+  For unit testing set OMP_PROC_BIND=false
+
+CPU (Kokkos OpenMP, 4 threads): pi = 3.141592653590 (error 3.2e-14) in 0.901 s (6.7 GFLOP/s)
+Kokkos::OpenMP::initialize WARNING: OMP_PROC_BIND environment variable not set
+  In general, for best performance with OpenMP 4.0 or better set OMP_PROC_BIND=spread and OMP_PLACES=threads
+  For best performance with OpenMP 3.1 set OMP_PROC_BIND=true
+  For unit testing set OMP_PROC_BIND=false
+
+GPU (Kokkos Cuda): pi = 3.141592653590 (error 4.4e-16) in 0.090 s (66.4 GFLOP/s)
+Kokkos::OpenMP::initialize WARNING: OMP_PROC_BIND environment variable not set
+  In general, for best performance with OpenMP 4.0 or better set OMP_PROC_BIND=spread and OMP_PLACES=threads
+  For best performance with OpenMP 3.1 set OMP_PROC_BIND=true
+  For unit testing set OMP_PROC_BIND=false
+
+CPU sequential (Kokkos Serial): 2048x2048 matrix product correct in 2.319 s (7.4 GFLOP/s)
+Kokkos::OpenMP::initialize WARNING: OMP_PROC_BIND environment variable not set
+  In general, for best performance with OpenMP 4.0 or better set OMP_PROC_BIND=spread and OMP_PLACES=threads
+  For best performance with OpenMP 3.1 set OMP_PROC_BIND=true
+  For unit testing set OMP_PROC_BIND=false
+
+CPU (Kokkos OpenMP, 4 threads): 2048x2048 matrix product correct in 0.819 s (21.0 GFLOP/s)
+Kokkos::OpenMP::initialize WARNING: OMP_PROC_BIND environment variable not set
+  In general, for best performance with OpenMP 4.0 or better set OMP_PROC_BIND=spread and OMP_PLACES=threads
+  For best performance with OpenMP 3.1 set OMP_PROC_BIND=true
+  For unit testing set OMP_PROC_BIND=false
+
+GPU (Kokkos Cuda): 2048x2048 matrix product correct in 0.026 s (660.1 GFLOP/s)
+== run 3
+Loading kokkos/5.2.2
+  Loading requirement: cuda/13.0.2
+-- Enabled Kokkos devices: OPENMP;SERIAL;CUDA
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/gpuaas-4gpu-runall/workspace/kokkos/build
+[ 16%] Built target pi_seq
+[ 33%] Built target pi_cpu
+[ 50%] Built target pi_gpu
+[ 66%] Built target matmul_seq
+[ 83%] Built target matmul_cpu
+[100%] Built target matmul_gpu
+Kokkos::OpenMP::initialize WARNING: OMP_PROC_BIND environment variable not set
+  In general, for best performance with OpenMP 4.0 or better set OMP_PROC_BIND=spread and OMP_PLACES=threads
+  For best performance with OpenMP 3.1 set OMP_PROC_BIND=true
+  For unit testing set OMP_PROC_BIND=false
+
+CPU sequential (Kokkos Serial): pi = 3.141592653590 (error 1.8e-13) in 2.809 s (2.1 GFLOP/s)
+Kokkos::OpenMP::initialize WARNING: OMP_PROC_BIND environment variable not set
+  In general, for best performance with OpenMP 4.0 or better set OMP_PROC_BIND=spread and OMP_PLACES=threads
+  For best performance with OpenMP 3.1 set OMP_PROC_BIND=true
+  For unit testing set OMP_PROC_BIND=false
+
+CPU (Kokkos OpenMP, 4 threads): pi = 3.141592653590 (error 3.2e-14) in 0.899 s (6.7 GFLOP/s)
+Kokkos::OpenMP::initialize WARNING: OMP_PROC_BIND environment variable not set
+  In general, for best performance with OpenMP 4.0 or better set OMP_PROC_BIND=spread and OMP_PLACES=threads
+  For best performance with OpenMP 3.1 set OMP_PROC_BIND=true
+  For unit testing set OMP_PROC_BIND=false
+
+GPU (Kokkos Cuda): pi = 3.141592653590 (error 4.4e-16) in 0.090 s (66.4 GFLOP/s)
+Kokkos::OpenMP::initialize WARNING: OMP_PROC_BIND environment variable not set
+  In general, for best performance with OpenMP 4.0 or better set OMP_PROC_BIND=spread and OMP_PLACES=threads
+  For best performance with OpenMP 3.1 set OMP_PROC_BIND=true
+  For unit testing set OMP_PROC_BIND=false
+
+CPU sequential (Kokkos Serial): 2048x2048 matrix product correct in 2.337 s (7.4 GFLOP/s)
+Kokkos::OpenMP::initialize WARNING: OMP_PROC_BIND environment variable not set
+  In general, for best performance with OpenMP 4.0 or better set OMP_PROC_BIND=spread and OMP_PLACES=threads
+  For best performance with OpenMP 3.1 set OMP_PROC_BIND=true
+  For unit testing set OMP_PROC_BIND=false
+
+CPU (Kokkos OpenMP, 4 threads): 2048x2048 matrix product correct in 0.831 s (20.7 GFLOP/s)
+Kokkos::OpenMP::initialize WARNING: OMP_PROC_BIND environment variable not set
+  In general, for best performance with OpenMP 4.0 or better set OMP_PROC_BIND=spread and OMP_PLACES=threads
+  For best performance with OpenMP 3.1 set OMP_PROC_BIND=true
+  For unit testing set OMP_PROC_BIND=false
+
+GPU (Kokkos Cuda): 2048x2048 matrix product correct in 0.029 s (599.6 GFLOP/s)

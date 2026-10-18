@@ -1,0 +1,120 @@
+== run 1
+gcc -O3 -march=x86-64-v3 -o pi_seq pi_seq.c
+gcc -O3 -march=x86-64-v3 -fopenmp -o pi_cpu pi_cpu.c
+gcc-offload -O3 -march=x86-64-v3 -o pi_gpu pi_gpu.c
+/usr/bin/ld: /tmp/cc4lo9DM.crtoffloadtable.o: warning: relocation against `__offload_vars_end' in read-only section `.rodata'
+/usr/bin/ld: warning: creating DT_TEXTREL in a PIE
+gcc -O3 -march=x86-64-v3 -o matmul_seq matmul_seq.c
+gcc -O3 -march=x86-64-v3 -fopenmp -o matmul_cpu matmul_cpu.c
+gcc-offload -O3 -march=x86-64-v3 -o matmul_gpu matmul_gpu.c
+/usr/bin/ld: /tmp/ccOrluhh.crtoffloadtable.o: warning: relocation against `__offload_vars_end' in read-only section `.rodata'
+/usr/bin/ld: warning: creating DT_TEXTREL in a PIE
+./pi_seq
+CPU sequential (GCC): pi = 3.141592653590 (error 1.8e-13) in 1.494 s (4.0 GFLOP/s)
+./pi_cpu
+CPU (GCC OpenMP, 4 threads): pi = 3.141592653590 (error 2.8e-14) in 0.461 s (13.0 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./pi_gpu
+GPU (GCC OpenMP target): pi = 3.141592653590 (error 2.2e-15) in 0.092 s (65.1 GFLOP/s)
+./matmul_seq
+CPU sequential (GCC): 2048x2048 matrix product correct in 2.151 s (8.0 GFLOP/s)
+./matmul_cpu
+CPU (GCC OpenMP, 4 threads): 2048x2048 matrix product correct in 0.909 s (18.9 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./matmul_gpu
+GPU (GCC OpenMP target): 2048x2048 matrix product correct in 0.052 s (328.0 GFLOP/s)
+make: Entering directory '/tmp/gpuaas-4gpu-runall/workspace/gcc-offload/fortran'
+gfortran -O3 -march=x86-64-v3 -c common.f90
+gfortran -O3 -march=x86-64-v3 -o pi_seq pi_seq.f90 common.o
+gfortran -O3 -march=x86-64-v3 -fopenmp -o pi_cpu pi_cpu.f90 common.o
+gfortran-offload -O3 -march=x86-64-v3 -o pi_gpu pi_gpu.f90 common.o
+/usr/bin/ld: /tmp/ccWkCFjl.crtoffloadtable.o: warning: relocation against `__offload_vars_end' in read-only section `.rodata'
+/usr/bin/ld: warning: creating DT_TEXTREL in a PIE
+gfortran-offload -O3 -march=x86-64-v3 -fopenacc -o pi_acc pi_acc.f90 common.o
+/usr/bin/ld: /tmp/cc58vRYW.crtoffloadtable.o: warning: relocation against `__offload_vars_end' in read-only section `.rodata'
+/usr/bin/ld: warning: creating DT_TEXTREL in a PIE
+gfortran -O3 -march=x86-64-v3 -o matmul_seq matmul_seq.f90 common.o
+gfortran -O3 -march=x86-64-v3 -fopenmp -o matmul_cpu matmul_cpu.f90 common.o
+gfortran-offload -O3 -march=x86-64-v3 -o matmul_gpu matmul_gpu.f90 common.o
+/usr/bin/ld: /tmp/ccrplVBx.crtoffloadtable.o: warning: relocation against `__offload_vars_end' in read-only section `.rodata'
+/usr/bin/ld: warning: creating DT_TEXTREL in a PIE
+gfortran-offload -O3 -march=x86-64-v3 -fopenacc -o matmul_acc matmul_acc.f90 common.o
+/usr/bin/ld: /tmp/ccgztr5b.crtoffloadtable.o: warning: relocation against `__offload_vars_end' in read-only section `.rodata'
+/usr/bin/ld: warning: creating DT_TEXTREL in a PIE
+./pi_seq
+CPU sequential (gfortran): pi = 3.141592653590 (error 1.8e-13) in 1.430 s (4.2 GFLOP/s)
+./pi_cpu
+CPU (gfortran OpenMP, 4 threads): pi = 3.141592653590 (error 2.8e-14) in 0.460 s (13.0 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./pi_gpu
+GPU (gfortran OpenMP target): pi = 3.141592653590 (error 1.3e-15) in 0.092 s (65.1 GFLOP/s)
+./pi_acc
+GPU (gfortran OpenACC): pi = 3.141592653590 (error 1.3e-15) in 0.085 s (70.9 GFLOP/s)
+./matmul_seq
+CPU sequential (gfortran): 2048x2048 matrix product correct in 2.099 s (8.2 GFLOP/s)
+./matmul_cpu
+CPU (gfortran OpenMP, 4 threads): 2048x2048 matrix product correct in 0.905 s (19.0 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./matmul_gpu
+GPU (gfortran OpenMP target): 2048x2048 matrix product correct in 0.049 s (347.1 GFLOP/s)
+./matmul_acc
+GPU (gfortran OpenACC): 2048x2048 matrix product correct in 0.055 s (313.7 GFLOP/s)
+make: Leaving directory '/tmp/gpuaas-4gpu-runall/workspace/gcc-offload/fortran'
+== run 2
+./pi_seq
+CPU sequential (GCC): pi = 3.141592653590 (error 1.8e-13) in 1.494 s (4.0 GFLOP/s)
+./pi_cpu
+CPU (GCC OpenMP, 4 threads): pi = 3.141592653590 (error 2.8e-14) in 0.461 s (13.0 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./pi_gpu
+GPU (GCC OpenMP target): pi = 3.141592653590 (error 1.3e-15) in 0.093 s (64.4 GFLOP/s)
+./matmul_seq
+CPU sequential (GCC): 2048x2048 matrix product correct in 2.037 s (8.4 GFLOP/s)
+./matmul_cpu
+CPU (GCC OpenMP, 4 threads): 2048x2048 matrix product correct in 0.901 s (19.1 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./matmul_gpu
+GPU (GCC OpenMP target): 2048x2048 matrix product correct in 0.048 s (355.3 GFLOP/s)
+make: Entering directory '/tmp/gpuaas-4gpu-runall/workspace/gcc-offload/fortran'
+./pi_seq
+CPU sequential (gfortran): pi = 3.141592653590 (error 1.8e-13) in 1.408 s (4.3 GFLOP/s)
+./pi_cpu
+CPU (gfortran OpenMP, 4 threads): pi = 3.141592653590 (error 2.8e-14) in 0.460 s (13.0 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./pi_gpu
+GPU (gfortran OpenMP target): pi = 3.141592653590 (error 4.4e-16) in 0.093 s (64.4 GFLOP/s)
+./pi_acc
+GPU (gfortran OpenACC): pi = 3.141592653590 (error 1.8e-15) in 0.085 s (70.7 GFLOP/s)
+./matmul_seq
+CPU sequential (gfortran): 2048x2048 matrix product correct in 2.131 s (8.1 GFLOP/s)
+./matmul_cpu
+CPU (gfortran OpenMP, 4 threads): 2048x2048 matrix product correct in 0.892 s (19.3 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./matmul_gpu
+GPU (gfortran OpenMP target): 2048x2048 matrix product correct in 0.050 s (344.0 GFLOP/s)
+./matmul_acc
+GPU (gfortran OpenACC): 2048x2048 matrix product correct in 0.055 s (313.6 GFLOP/s)
+make: Leaving directory '/tmp/gpuaas-4gpu-runall/workspace/gcc-offload/fortran'
+== run 3
+./pi_seq
+CPU sequential (GCC): pi = 3.141592653590 (error 1.8e-13) in 1.291 s (4.6 GFLOP/s)
+./pi_cpu
+CPU (GCC OpenMP, 4 threads): pi = 3.141592653590 (error 2.8e-14) in 0.483 s (12.4 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./pi_gpu
+GPU (GCC OpenMP target): pi = 3.141592653590 (error 1.8e-15) in 0.092 s (65.2 GFLOP/s)
+./matmul_seq
+CPU sequential (GCC): 2048x2048 matrix product correct in 2.022 s (8.5 GFLOP/s)
+./matmul_cpu
+CPU (GCC OpenMP, 4 threads): 2048x2048 matrix product correct in 0.945 s (18.2 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./matmul_gpu
+GPU (GCC OpenMP target): 2048x2048 matrix product correct in 0.053 s (324.4 GFLOP/s)
+make: Entering directory '/tmp/gpuaas-4gpu-runall/workspace/gcc-offload/fortran'
+./pi_seq
+CPU sequential (gfortran): pi = 3.141592653590 (error 1.8e-13) in 1.561 s (3.8 GFLOP/s)
+./pi_cpu
+CPU (gfortran OpenMP, 4 threads): pi = 3.141592653590 (error 2.8e-14) in 0.469 s (12.8 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./pi_gpu
+GPU (gfortran OpenMP target): pi = 3.141592653590 (error 1.8e-15) in 0.092 s (65.1 GFLOP/s)
+./pi_acc
+GPU (gfortran OpenACC): pi = 3.141592653590 (error 8.9e-16) in 0.090 s (66.8 GFLOP/s)
+./matmul_seq
+CPU sequential (gfortran): 2048x2048 matrix product correct in 2.037 s (8.4 GFLOP/s)
+./matmul_cpu
+CPU (gfortran OpenMP, 4 threads): 2048x2048 matrix product correct in 0.877 s (19.6 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./matmul_gpu
+GPU (gfortran OpenMP target): 2048x2048 matrix product correct in 0.050 s (344.2 GFLOP/s)
+./matmul_acc
+GPU (gfortran OpenACC): 2048x2048 matrix product correct in 0.055 s (314.0 GFLOP/s)
+make: Leaving directory '/tmp/gpuaas-4gpu-runall/workspace/gcc-offload/fortran'

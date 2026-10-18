@@ -1,0 +1,23 @@
+# CUDA toolkit from NVIDIA's apt repository for the Ubuntu version of the image: compiler, libraries
+# and command-line tools (cuda-gdb, CUPTI, compute-sanitizer), not the meta package cuda-toolkit-*,
+# whose graphical profilers (Nsight Systems/Compute) pull in EGL and Mesa; install
+# cuda-nsight-systems-13-4 or cuda-nsight-compute-13-4 when needed. No driver, so the Ubuntu driver
+# stays in place.
+# The HPC packages (Spack) bring their own CUDA 13.0; this package is for using CUDA directly.
+gpuaas:
+  title: CUDA toolkit 13.4
+  group: Basics
+  order: 10
+  disk: 5
+  os:
+    ubuntu-26.04: tested
+    ubuntu-24.04: tested
+write_files:
+  - path: /etc/profile.d/cuda.sh
+    content: |
+      export PATH=/usr/local/cuda/bin:$PATH
+runcmd:
+  - . /etc/os-release && curl -fsSL -o /tmp/cuda-keyring.deb "https://developer.download.nvidia.com/compute/cuda/repos/ubuntu$(echo "$VERSION_ID" | tr -d .)/x86_64/cuda-keyring_1.1-1_all.deb"
+  - dpkg -i /tmp/cuda-keyring.deb
+  - apt-get -o DPkg::Lock::Timeout=600 update
+  - DEBIAN_FRONTEND=noninteractive apt-get -o DPkg::Lock::Timeout=600 install -y cuda-compiler-13-4 cuda-libraries-dev-13-4 cuda-command-line-tools-13-4 cuda-nvml-dev-13-4

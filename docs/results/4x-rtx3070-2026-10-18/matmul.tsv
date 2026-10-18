@@ -1,0 +1,61 @@
+header	0				cuda
+bar	1	8.3	2.059	seq	C++
+bar	2	648.9	0.026	gpu	CUDA kernel
+band	-0.5	2.5			1
+header	3.6				gcc-offload
+bar	4.6	8.4	2.037	seq	GCC
+bar	5.6	18.9	0.909	cpu	GCC OpenMP, 4 threads
+bar	6.6	328.0	0.052	gpu	GCC OpenMP target
+bar	7.6	8.2	2.099	seq	gfortran
+bar	8.6	19.3	0.892	cpu	gfortran OpenMP, 4 threads
+bar	9.6	344.0	0.050	gpu	gfortran OpenMP target
+bar	10.6	313.6	0.055	gpu	gfortran OpenACC
+band	3.1	11.1			0
+header	12.2				llvm-offload
+bar	13.2	7.2	2.396	seq	Clang
+bar	14.2	20.4	0.842	cpu	Clang OpenMP, 4 threads
+bar	15.2	247.5	0.069	gpu	Clang OpenMP target
+bar	16.2	7.3	2.351	seq	flang
+bar	17.2	19.9	0.865	cpu	flang OpenMP, 4 threads
+bar	18.2	59.0	0.291	gpu	flang OpenMP target
+band	11.7	18.7			1
+header	19.8				nvhpc
+bar	20.8	7.4	2.314	seq	nvfortran
+bar	21.8	21.4	0.802	cpu	nvfortran OpenMP, 4 threads
+bar	22.8	458.3	0.037	gpu	nvfortran OpenMP target
+bar	23.8	489.7	0.035	gpu	nvfortran OpenACC
+bar	24.8	200.6	0.086	gpu	nvfortran do concurrent
+bar	25.8	282.0	0.061	gpu	nvfortran CUDA Fortran
+band	19.3	26.3			0
+header	27.4				openmpi
+bar	28.4	8.1	2.113	seq	GCC
+bar	29.4	16.9	1.017	cpu	MPI, 4 ranks
+bar	30.4	306.4	0.056	gpu	MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware
+band	26.9	30.9			1
+header	32				kokkos
+bar	33	7.4	2.319	seq	Kokkos Serial
+bar	34	20.7	0.831	cpu	Kokkos OpenMP, 4 threads
+bar	35	646.6	0.027	gpu	Kokkos Cuda
+band	31.5	35.5			0
+header	36.6				hpx
+bar	37.6	6.2	2.752	seq	HPX for_loop seq
+bar	38.6	19.1	0.901	cpu	HPX for_loop, 4 worker threads
+bar	39.6	554.9	0.031	gpu	CUDA kernel via HPX cuda_executor
+band	36.1	40.1			1
+header	41.2				chapel
+bar	42.2	7.2	2.385	seq	Chapel for
+bar	43.2	21.7	0.793	cpu	Chapel forall, 4 tasks
+bar	44.2	470.3	0.037	gpu	Chapel forall on here.gpus[0]
+bar	45.2	759.3	0.023	gpu	Chapel forall on 4 GPUs
+band	40.7	45.7			0
+header	46.8				julia
+bar	47.8	7.6	2.264	seq	Julia
+bar	48.8	23.6	0.728	cpu	Dagger, 4 threads, 16 tasks
+bar	49.8	1382.6	0.012	gpu	CUDA.jl arrays: A * B with cuBLAS
+bar	50.8	714.4	0.024	gpu	CUDA.jl kernel
+bar	51.8	700.9	0.025	gpu	KernelAbstractions
+bar	52.8	275.9	0.062	gpu	Dagger.Kernel
+bar	53.8	209.6	0.082	gpu	Dagger manual on CUDABackend
+bar	54.8	351.3	0.049	gpu	Dagger Datadeps on 4 GPUs
+bar	55.8	307.6	0.056	gpu	Dagger DArray on 4 GPUs: A * B with cuBLAS
+band	46.3	56.3			1

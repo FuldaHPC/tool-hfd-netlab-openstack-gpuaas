@@ -1,0 +1,104 @@
+== run 1
+nvfortran -O3 -tp=x86-64-v3 -c common.f90
+nvfortran -O3 -tp=x86-64-v3 -o pi_seq pi_seq.f90 common.o
+pi_seq.f90:
+pi_seq.f90:
+nvfortran -O3 -tp=x86-64-v3 -mp -o pi_cpu pi_cpu.f90 common.o
+pi_cpu.f90:
+nvfortran -O3 -tp=x86-64-v3 -mp=gpu -gpu=ccnative -o pi_gpu pi_gpu.f90 common.o
+pi_gpu.f90:
+nvfortran -O3 -tp=x86-64-v3 -acc=gpu -gpu=ccnative -o pi_acc pi_acc.f90 common.o
+pi_acc.f90:
+nvfortran -O3 -tp=x86-64-v3 -stdpar=gpu -gpu=ccnative -o pi_stdpar pi_stdpar.f90 common.o
+pi_stdpar.f90:
+pi_stdpar.f90:
+nvfortran -O3 -tp=x86-64-v3 -cuda -gpu=ccnative -o pi_cuf pi_cuf.cuf common.o
+pi_cuf.cuf:
+nvfortran -O3 -tp=x86-64-v3 -o matmul_seq matmul_seq.f90 common.o
+matmul_seq.f90:
+matmul_seq.f90:
+nvfortran -O3 -tp=x86-64-v3 -mp -o matmul_cpu matmul_cpu.f90 common.o
+matmul_cpu.f90:
+nvfortran -O3 -tp=x86-64-v3 -mp=gpu -gpu=ccnative -o matmul_gpu matmul_gpu.f90 common.o
+matmul_gpu.f90:
+nvfortran -O3 -tp=x86-64-v3 -acc=gpu -gpu=ccnative -o matmul_acc matmul_acc.f90 common.o
+matmul_acc.f90:
+nvfortran -O3 -tp=x86-64-v3 -stdpar=gpu -gpu=ccnative -o matmul_stdpar matmul_stdpar.f90 common.o
+matmul_stdpar.f90:
+matmul_stdpar.f90:
+nvfortran -O3 -tp=x86-64-v3 -cuda -gpu=ccnative -o matmul_cuf matmul_cuf.cuf common.o
+matmul_cuf.cuf:
+./pi_seq
+CPU sequential (nvfortran): pi = 3.141592653590 (error 2.5e-14) in 0.821 s (7.3 GFLOP/s)
+./pi_cpu
+CPU (nvfortran OpenMP, 4 threads): pi = 3.141592653590 (error 6.2e-14) in 0.246 s (24.4 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./pi_gpu
+GPU (nvfortran OpenMP target): pi = 3.141592653589 (error 3.7e-13) in 0.141 s (42.7 GFLOP/s)
+./pi_acc
+GPU (nvfortran OpenACC): pi = 3.141592653590 (error 0.0e+00) in 0.085 s (70.8 GFLOP/s)
+./pi_stdpar
+GPU (nvfortran do concurrent): pi = 3.141592653590 (error 0.0e+00) in 0.085 s (70.2 GFLOP/s)
+./pi_cuf
+GPU (nvfortran CUDA Fortran): pi = 3.141592653590 (error 2.2e-15) in 0.087 s (68.8 GFLOP/s)
+./matmul_seq
+CPU sequential (nvfortran): 2048x2048 matrix product correct in 2.314 s (7.4 GFLOP/s)
+./matmul_cpu
+CPU (nvfortran OpenMP, 4 threads): 2048x2048 matrix product correct in 0.791 s (21.7 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./matmul_gpu
+GPU (nvfortran OpenMP target): 2048x2048 matrix product correct in 0.040 s (424.5 GFLOP/s)
+./matmul_acc
+GPU (nvfortran OpenACC): 2048x2048 matrix product correct in 0.034 s (505.3 GFLOP/s)
+./matmul_stdpar
+GPU (nvfortran do concurrent): 2048x2048 matrix product correct in 0.086 s (200.0 GFLOP/s)
+./matmul_cuf
+GPU (nvfortran CUDA Fortran): 2048x2048 matrix product correct in 0.058 s (295.4 GFLOP/s)
+== run 2
+./pi_seq
+CPU sequential (nvfortran): pi = 3.141592653590 (error 2.5e-14) in 0.809 s (7.4 GFLOP/s)
+./pi_cpu
+CPU (nvfortran OpenMP, 4 threads): pi = 3.141592653590 (error 6.2e-14) in 0.246 s (24.4 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./pi_gpu
+GPU (nvfortran OpenMP target): pi = 3.141592653589 (error 3.7e-13) in 0.141 s (42.6 GFLOP/s)
+./pi_acc
+GPU (nvfortran OpenACC): pi = 3.141592653590 (error 0.0e+00) in 0.085 s (70.8 GFLOP/s)
+./pi_stdpar
+GPU (nvfortran do concurrent): pi = 3.141592653590 (error 0.0e+00) in 0.086 s (70.0 GFLOP/s)
+./pi_cuf
+GPU (nvfortran CUDA Fortran): pi = 3.141592653590 (error 2.7e-15) in 0.087 s (68.8 GFLOP/s)
+./matmul_seq
+CPU sequential (nvfortran): 2048x2048 matrix product correct in 2.323 s (7.4 GFLOP/s)
+./matmul_cpu
+CPU (nvfortran OpenMP, 4 threads): 2048x2048 matrix product correct in 0.810 s (21.2 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./matmul_gpu
+GPU (nvfortran OpenMP target): 2048x2048 matrix product correct in 0.030 s (579.1 GFLOP/s)
+./matmul_acc
+GPU (nvfortran OpenACC): 2048x2048 matrix product correct in 0.036 s (481.3 GFLOP/s)
+./matmul_stdpar
+GPU (nvfortran do concurrent): 2048x2048 matrix product correct in 0.087 s (198.4 GFLOP/s)
+./matmul_cuf
+GPU (nvfortran CUDA Fortran): 2048x2048 matrix product correct in 0.061 s (282.0 GFLOP/s)
+== run 3
+./pi_seq
+CPU sequential (nvfortran): pi = 3.141592653590 (error 2.5e-14) in 0.813 s (7.4 GFLOP/s)
+./pi_cpu
+CPU (nvfortran OpenMP, 4 threads): pi = 3.141592653590 (error 6.2e-14) in 0.247 s (24.3 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./pi_gpu
+GPU (nvfortran OpenMP target): pi = 3.141592653589 (error 3.7e-13) in 0.141 s (42.7 GFLOP/s)
+./pi_acc
+GPU (nvfortran OpenACC): pi = 3.141592653590 (error 0.0e+00) in 0.085 s (70.7 GFLOP/s)
+./pi_stdpar
+GPU (nvfortran do concurrent): pi = 3.141592653590 (error 0.0e+00) in 0.086 s (70.2 GFLOP/s)
+./pi_cuf
+GPU (nvfortran CUDA Fortran): pi = 3.141592653590 (error 1.8e-15) in 0.087 s (68.8 GFLOP/s)
+./matmul_seq
+CPU sequential (nvfortran): 2048x2048 matrix product correct in 2.311 s (7.4 GFLOP/s)
+./matmul_cpu
+CPU (nvfortran OpenMP, 4 threads): 2048x2048 matrix product correct in 0.802 s (21.4 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./matmul_gpu
+GPU (nvfortran OpenMP target): 2048x2048 matrix product correct in 0.037 s (458.3 GFLOP/s)
+./matmul_acc
+GPU (nvfortran OpenACC): 2048x2048 matrix product correct in 0.035 s (489.7 GFLOP/s)
+./matmul_stdpar
+GPU (nvfortran do concurrent): 2048x2048 matrix product correct in 0.086 s (200.6 GFLOP/s)
+./matmul_cuf
+GPU (nvfortran CUDA Fortran): 2048x2048 matrix product correct in 0.066 s (259.1 GFLOP/s)

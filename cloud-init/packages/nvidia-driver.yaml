@@ -1,0 +1,33 @@
+# Headless variant of the NVIDIA driver that ubuntu-drivers recommends for the passed-through GPU:
+# only the compute part (libcuda, NVML), nvidia-smi and the prebuilt kernel modules, without the
+# X server, Mesa and OpenGL libraries that the full driver package (ubuntu-drivers install) pulls in.
+# Images that already have a working driver (e.g. snapshots) skip the install and the reboot.
+gpuaas:
+  title: NVIDIA driver
+  group: Basics
+  order: 0
+  required: true
+  disk: 1
+  os:
+    ubuntu-26.04: tested
+    ubuntu-24.04: tested
+  check: nvidia-smi
+package_update: true
+packages:
+  - ubuntu-drivers-common
+write_files:
+  - path: /usr/local/sbin/gpuaas-nvidia-driver
+    permissions: "0755"
+    content: |
+      #!/bin/sh
+      # Installs the headless form of the recommended NVIDIA driver (installed by gpuaas.py).
+      set -e
+      export DEBIAN_FRONTEND=noninteractive
+      # e.g. "nvidia-driver-595-open linux-modules-nvidia-595-open-generic"
+      set -- $(ubuntu-drivers list --recommended)
+      driver=${1#nvidia-driver-}  # 595-open
+      # Prebuilt kernel modules when Ubuntu has them, otherwise DKMS builds them.
+      modules=${2:-nvidia-dkms-$driver}
+      DEBIAN_FRONTEND=noninteractive apt-get -o DPkg::Lock::Timeout=600 install -y "nvidia-headless-no-dkms-$driver" "nvidia-utils-${driver%-open}" "$modules"
+runcmd:
+  - nvidia-smi || { gpuaas-nvidia-driver && touch /run/gpuaas-reboot; }

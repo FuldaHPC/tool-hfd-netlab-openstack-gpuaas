@@ -1,0 +1,21 @@
+QUICK pi_gpu_dagger_datadeps.jl -t1 1 GPU (Dagger Datadeps on 4 GPUs, NVIDIA GeForce RTX 3070): pi = 3.141592653590 (error 8.9e-16) in 0.069 s (87.4 GFLOP/s)
+QUICK pi_gpu_dagger_datadeps.jl -t1 2 GPU (Dagger Datadeps on 4 GPUs, NVIDIA GeForce RTX 3070): pi = 3.141592653590 (error 8.9e-16) in 0.058 s (103.9 GFLOP/s)
+QUICK pi_gpu_dagger_datadeps.jl -t1 3 GPU (Dagger Datadeps on 4 GPUs, NVIDIA GeForce RTX 3070): pi = 3.141592653590 (error 8.9e-16) in 0.060 s (100.7 GFLOP/s)
+QUICK pi_gpu_dagger_datadeps.jl -t auto 1 GPU (Dagger Datadeps on 4 GPUs, NVIDIA GeForce RTX 3070): pi = 3.141592653590 (error 8.9e-16) in 0.067 s (90.1 GFLOP/s)
+QUICK pi_gpu_dagger_datadeps.jl -t auto 2 GPU (Dagger Datadeps on 4 GPUs, NVIDIA GeForce RTX 3070): pi = 3.141592653590 (error 8.9e-16) in 0.063 s (94.6 GFLOP/s)
+QUICK pi_gpu_dagger_datadeps.jl -t auto 3 GPU (Dagger Datadeps on 4 GPUs, NVIDIA GeForce RTX 3070): pi = 3.141592653590 (error 8.9e-16) in 0.083 s (72.6 GFLOP/s)
+QUICK pi_gpu_dagger_darray.jl -t1 1 GPU (Dagger DArray on 4 GPUs, NVIDIA GeForce RTX 3070): pi = 3.141592653590 (error 4.4e-16) in 0.048 s (123.8 GFLOP/s)
+QUICK pi_gpu_dagger_darray.jl -t1 2 GPU (Dagger DArray on 4 GPUs, NVIDIA GeForce RTX 3070): pi = 3.141592653590 (error 4.4e-16) in 0.046 s (131.8 GFLOP/s)
+QUICK pi_gpu_dagger_darray.jl -t1 3 GPU (Dagger DArray on 4 GPUs, NVIDIA GeForce RTX 3070): pi = 3.141592653590 (error 4.4e-16) in 0.045 s (133.4 GFLOP/s)
+QUICK pi_gpu_dagger_darray.jl -t auto 1 GPU (Dagger DArray on 4 GPUs, NVIDIA GeForce RTX 3070): pi = 3.141592653590 (error 4.4e-16) in 0.045 s (133.7 GFLOP/s)
+QUICK pi_gpu_dagger_darray.jl -t auto 2 GPU (Dagger DArray on 4 GPUs, NVIDIA GeForce RTX 3070): pi = 3.141592653590 (error 4.4e-16) in 0.068 s (88.5 GFLOP/s)
+QUICK pi_gpu_dagger_darray.jl -t auto 3 GPU (Dagger DArray on 4 GPUs, NVIDIA GeForce RTX 3070): pi = 3.141592653590 (error 4.4e-16) in 0.068 s (88.1 GFLOP/s)
+== DArray layouts, n = 2048
+2x2 blocks, runs 0.068 0.098 0.098, median: 2048x2048 matrix product correct in 0.098 s (175.3 GFLOP/s)
+A whole, B in 4 column blocks, runs 0.205 0.235 0.307, median: 2048x2048 matrix product correct in 0.235 s (73.0 GFLOP/s)
+4x4 blocks, runs 0.141 0.172 0.201, median: 2048x2048 matrix product correct in 0.172 s (100.1 GFLOP/s)
+== DArray layouts, n = 8192
+2x2 blocks, runs 1.173 1.467 1.178, median: 8192x8192 matrix product correct in 1.178 s (933.8 GFLOP/s)
+A whole, B in 4 column blocks, runs 2.241 2.231 2.169, median: 8192x8192 matrix product correct in 2.231 s (492.8 GFLOP/s)
+4x4 blocks, runs 1.708 1.576 1.433, median: 8192x8192 matrix product correct in 1.576 s (697.5 GFLOP/s)
+== done

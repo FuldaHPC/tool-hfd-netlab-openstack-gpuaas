@@ -1,0 +1,14 @@
+# HPX with CUDA support, built with Spack. System allocator and no networking (one node), which
+# avoids gperftools and MPI as dependencies; hwloc comes from Spack (shared with Open MPI), Boost
+# only with its headers (see the hpx overlay in spack.yaml).
+gpuaas:
+  title: HPX with CUDA support
+  group: HPC (Spack, Ubuntu 24.04)
+  order: 53
+  requires: [spack]
+  long: true
+  disk: 0.5
+  os:
+    ubuntu-24.04: tested
+    ubuntu-26.04: "no: part of the Spack HPC stack (CUDA 13.0)"
+  build: gpuaas-spack hpx +cuda cuda_arch=@CUDA_ARCH@ malloc=system networking=none

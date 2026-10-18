@@ -1,0 +1,23 @@
+# gpu-burn stress test (https://github.com/wilicc/gpu-burn), built as a Docker image during setup.
+# The job runs once after the instance is ready; gpuaas.py replaces @BURN_ARGS@
+# with the gpu_burn options and the duration.
+gpuaas:
+  title: gpu-burn stress test
+  group: Containers
+  order: 40
+  requires: [docker]
+  disk: 16  # the CUDA devel image and the gpu_burn image built from it
+  os:
+    ubuntu-26.04: tested
+    ubuntu-24.04: tested
+  job: |
+    cd /home/ubuntu/gpu-burn
+    log="gpu-burn-results_$(date +%Y-%m-%d_%H-%M-%S).log"
+    docker run --rm --gpus all gpu_burn ./gpu_burn @BURN_ARGS@ > "$log" 2>&1 || echo "gpu-burn failed, see $log"
+    chown ubuntu:ubuntu "$log"
+packages:
+  - git
+runcmd:
+  - git clone https://github.com/wilicc/gpu-burn /home/ubuntu/gpu-burn
+  - docker build -t gpu_burn /home/ubuntu/gpu-burn
+  - chown -R ubuntu:ubuntu /home/ubuntu/gpu-burn

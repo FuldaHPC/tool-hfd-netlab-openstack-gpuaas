@@ -1,0 +1,42 @@
+# GCC (Ubuntu's default GCC) with OpenMP offloading to the NVIDIA GPU, from the Ubuntu archive.
+# Needs only the driver's libcuda, not the CUDA toolkit. Ubuntu's GCC enables -fcf-protection and
+# the stack protector, which the nvptx offload compiler cannot handle ("'-fcf-protection=full' is
+# not supported for this target", "Unknown symbol '__stack_chk_guard'"). The wrapper gcc-offload
+# turns -fcf-protection off for the offload code only (the host code keeps CET) and the stack
+# protector off for the whole program: the offload code inherits the host setting, so
+# -foffload-options=-fno-stack-protector has no effect (tested 2026-10-16). nvptx-as checks the PTX with
+# ptxas when one is in the PATH, and the ptxas of CUDA 13 rejects GCC 13's default sm_50 (Ubuntu 24.04
+# with the cuda package), so the wrapper skips that check, as without a CUDA toolkit; the driver compiles
+# the PTX for the GPU at run time. Usage: gcc-offload prog.c -o prog
+# gfortran-offload does the same for Fortran (OpenMP, and OpenACC with -fopenacc); the offload compiler
+# of gcc-offload-nvptx handles Fortran too, only gfortran itself is added.
+gpuaas:
+  title: GCC and gfortran GPU offloading
+  group: Basics
+  order: 20
+  disk: 1
+  os:
+    ubuntu-26.04: tested
+    ubuntu-24.04: tested
+write_files:
+  - path: /usr/local/bin/gcc-offload
+    permissions: "0755"
+    content: |
+      #!/bin/sh
+      # gcc with OpenMP offloading to the NVIDIA GPU, or OpenACC with -fopenacc (installed by gpuaas.py);
+      # GCC's offload tool mkoffload accepts only one of -fopenmp and -fopenacc.
+      case " $* " in *" -fopenacc "*) model= ;; *) model=-fopenmp ;; esac
+      exec gcc $model -foffload=nvptx-none -foffload-options=-fcf-protection=none \
+        -foffload-options=-Wa,--no-verify -fno-stack-protector "$@"
+  - path: /usr/local/bin/gfortran-offload
+    permissions: "0755"
+    content: |
+      #!/bin/sh
+      # gfortran with OpenMP offloading to the NVIDIA GPU, or OpenACC with -fopenacc (installed by gpuaas.py);
+      # GCC's offload tool mkoffload accepts only one of -fopenmp and -fopenacc.
+      case " $* " in *" -fopenacc "*) model= ;; *) model=-fopenmp ;; esac
+      exec gfortran $model -foffload=nvptx-none -foffload-options=-fcf-protection=none \
+        -foffload-options=-Wa,--no-verify -fno-stack-protector "$@"
+packages:
+  - gcc-offload-nvptx
+  - gfortran

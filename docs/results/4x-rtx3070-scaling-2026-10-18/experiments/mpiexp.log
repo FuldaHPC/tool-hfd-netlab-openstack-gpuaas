@@ -1,0 +1,21 @@
+Loading openmpi/5.0.11
+  Loading requirement: cuda/13.0.2
+MX 8192 cuda-aware 1 GPU (MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware): 8192x8192 matrix product correct in 0.945 s (1163.0 GFLOP/s)
+MX 8192 host-buffers 1 GPU (MPI, 4 ranks on 4 GPUs with CUDA kernels, host buffers): 8192x8192 matrix product correct in 1.425 s (771.6 GFLOP/s)
+MX 8192 cuda-aware-btl-sm 1 GPU (MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware): 8192x8192 matrix product correct in 0.944 s (1165.0 GFLOP/s)
+MX 8192 cuda-aware 2 GPU (MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware): 8192x8192 matrix product correct in 0.882 s (1246.6 GFLOP/s)
+MX 8192 host-buffers 2 GPU (MPI, 4 ranks on 4 GPUs with CUDA kernels, host buffers): 8192x8192 matrix product correct in 1.119 s (982.9 GFLOP/s)
+MX 8192 cuda-aware-btl-sm 2 GPU (MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware): 8192x8192 matrix product correct in 0.978 s (1124.4 GFLOP/s)
+MX 8192 cuda-aware 3 GPU (MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware): 8192x8192 matrix product correct in 0.944 s (1165.1 GFLOP/s)
+MX 8192 host-buffers 3 GPU (MPI, 4 ranks on 4 GPUs with CUDA kernels, host buffers): 8192x8192 matrix product correct in 1.158 s (949.8 GFLOP/s)
+MX 8192 cuda-aware-btl-sm 3 GPU (MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware): 8192x8192 matrix product correct in 0.902 s (1218.3 GFLOP/s)
+MX 2048 cuda-aware 1 GPU (MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware): 2048x2048 matrix product correct in 0.058 s (297.9 GFLOP/s)
+MX 2048 host-buffers 1 GPU (MPI, 4 ranks on 4 GPUs with CUDA kernels, host buffers): 2048x2048 matrix product correct in 0.081 s (212.3 GFLOP/s)
+MX 2048 cuda-aware-btl-sm 1 GPU (MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware): 2048x2048 matrix product correct in 0.059 s (289.4 GFLOP/s)
+MX 2048 cuda-aware 2 GPU (MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware): 2048x2048 matrix product correct in 0.059 s (292.6 GFLOP/s)
+MX 2048 host-buffers 2 GPU (MPI, 4 ranks on 4 GPUs with CUDA kernels, host buffers): 2048x2048 matrix product correct in 0.073 s (236.3 GFLOP/s)
+MX 2048 cuda-aware-btl-sm 2 GPU (MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware): 2048x2048 matrix product correct in 0.060 s (285.2 GFLOP/s)
+MX 2048 cuda-aware 3 GPU (MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware): 2048x2048 matrix product correct in 0.058 s (296.2 GFLOP/s)
+MX 2048 host-buffers 3 GPU (MPI, 4 ranks on 4 GPUs with CUDA kernels, host buffers): 2048x2048 matrix product correct in 0.074 s (232.8 GFLOP/s)
+MX 2048 cuda-aware-btl-sm 3 GPU (MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware): 2048x2048 matrix product correct in 0.060 s (288.4 GFLOP/s)
+== done

@@ -1,0 +1,15 @@
+# LLVM 22 (Clang and Flang) with OpenMP offloading to the NVIDIA GPU, built with Spack (the llvm of the
+# overlay repository in spack.yaml adds the OpenMP device runtime for NVIDIA GPUs and Flang's runtime).
+# The same LLVM serves Chapel. "module load llvm cuda" provides clang, flang and the ptxas they need for
+# the GPU code; usage: clang -O2 -fopenmp --offload-arch=native prog.c -o prog (likewise flang).
+gpuaas:
+  title: LLVM Clang/Flang with OpenMP offloading
+  group: HPC (Spack, Ubuntu 24.04)
+  order: 56
+  requires: [spack]
+  long: true
+  disk: 4.5  # LLVM (4.2 GB, shared with chapel)
+  os:
+    ubuntu-24.04: tested
+    ubuntu-26.04: "no: part of the Spack HPC stack (CUDA 13.0)"
+  build: gpuaas-spack llvm

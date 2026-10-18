@@ -1,0 +1,57 @@
+! Matrix product C = A B in a CUDA Fortran kernel with one thread per element of C; neighbouring threads
+! take neighbouring rows, which are neighbours in memory. The time includes allocating the GPU arrays,
+! copying A and B there and C back.
+module matmul_kernels
+  use cudafor
+  use iso_fortran_env, only: real32
+  implicit none
+contains
+  attributes(global) subroutine matmul_kernel(n, a, b, c)
+    integer, value :: n
+    real(real32), device :: a(n, n), b(n, n), c(n, n)
+    integer :: i, j, k
+    real(real32) :: s
+    i = (blockIdx%x - 1) * blockDim%x + threadIdx%x
+    j = (blockIdx%y - 1) * blockDim%y + threadIdx%y
+    if (i <= n .and. j <= n) then
+      s = 0
+      do k = 1, n
+        s = s + a(i, k) * b(k, j)
+      end do
+      c(i, j) = s
+    end if
+  end subroutine
+end module
+
+program matmul_cuf
+  use common
+  use matmul_kernels
+  implicit none
+  real(real32), allocatable :: a(:, :), b(:, :), c(:, :)
+  real(real64) :: start, seconds
+  allocate (a(matrix_n, matrix_n), b(matrix_n, matrix_n), c(matrix_n, matrix_n))
+  call matrix_init(a, b)
+  c = 0  ! writes C once, so that the page faults of fresh memory do not fall into the timed region
+  call matmul_cuda(a(1:16, 1:16), b(1:16, 1:16), c(1:16, 1:16))  ! warm-up: CUDA context and kernel
+  start = seconds_now()
+  call matmul_cuda(a, b, c)
+  seconds = seconds_now() - start
+  if (matrix_report("GPU (" // trim(compiler()) // " CUDA Fortran)", a, b, c, seconds) /= 0) error stop 1
+
+contains
+
+  subroutine matmul_cuda(a, b, c)
+    real(real32), intent(in), contiguous :: a(:, :), b(:, :)
+    real(real32), intent(out), contiguous :: c(:, :)
+    real(real32), device, allocatable :: da(:, :), db(:, :), dc(:, :)
+    integer :: n
+    n = size(a, 1)
+    allocate (da(n, n), db(n, n), dc(n, n))
+    da = a
+    db = b
+    call matmul_kernel<<<dim3((n + 15) / 16, (n + 15) / 16, 1), dim3(16, 16, 1)>>>(n, da, db, dc)
+    c = dc  ! copies back and waits for the kernel
+    deallocate (da, db, dc)
+  end subroutine
+
+end program

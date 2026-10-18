@@ -1,0 +1,99 @@
+# zsh with Oh My Zsh as login shell of user ubuntu: theme robbyrussell, autosuggestions, syntax
+# highlighting, fzf, z (zoxide), colored cat and man pages, and case-insensitive completion.
+# cloud-init writes files before the user exists, so the dotfiles are templates that runcmd copies
+# into the home directory; existing files and checkouts are kept (snapshots, own changes).
+# Oh My Zsh and the two zsh-users plugins are cloned with git (the official installer would
+# replace .zshrc and run chsh interactively).
+gpuaas:
+  title: zsh with Oh My Zsh, fzf and zoxide
+  group: Shell
+  order: 70
+  os:
+    ubuntu-26.04: tested
+    ubuntu-24.04: tested
+  check: >-
+    test "$(getent passwd ubuntu | cut -d: -f7)" = /usr/bin/zsh &&
+    runuser -u ubuntu -- env HOME=/home/ubuntu zsh -lic 'omz version >/dev/null &&
+    whence -w z colorize_cat _zsh_autosuggest_start _zsh_highlight >/dev/null &&
+    { [[ ! -r /usr/share/modules/init/zsh ]] || whence -w module >/dev/null }' < /dev/null 2>/dev/null
+packages:
+  - zsh
+  - fzf
+  - zoxide
+  - python3-pygments
+  - git
+write_files:
+  - path: /usr/local/share/gpuaas/zsh/zshrc
+    content: |
+      # zsh configuration from gpuaas.py (package zsh). Edit it freely:
+      # gpuaas.py does not overwrite an existing ~/.zshrc.
+
+      # Keep PATH free of duplicates, also when ~/.zshrc is sourced again.
+      typeset -U path PATH
+
+      export ZSH="$HOME/.oh-my-zsh"
+      ZSH_THEME="robbyrussell"
+      ZSH_COLORIZE_STYLE="github-dark"
+      plugins=(git colored-man-pages zsh-autosuggestions zsh-syntax-highlighting colorize fzf zoxide)
+      source $ZSH/oh-my-zsh.sh
+
+      # Environment Modules of the HPC stack: module avail, module load kokkos.
+      [[ -r /usr/share/modules/init/zsh ]] && source /usr/share/modules/init/zsh
+
+      # cat with syntax colors on a terminal (colorize plugin), plain cat in pipes.
+      unalias cat 2>/dev/null
+      cat() {
+        if [[ -t 1 ]] && (( $+functions[colorize_cat] )); then
+          colorize_cat "$@"
+        else
+          command cat "$@"
+        fi
+      }
+
+      # fzf searches case-insensitively.
+      export FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS:+$FZF_DEFAULT_OPTS }-i"
+
+      # Completion: case-insensitive, also inside words.
+      zstyle ':completion:*' matcher-list \
+        'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' \
+        'm:{[:lower:][:upper:]}={[:upper:][:lower:]} r:|=*' \
+        'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
+
+      # make: complete targets instead of files, without make's internal targets.
+      zstyle ':completion:*:make:*:targets' call-command true
+      zstyle ':completion:*:*:make:*' tag-order 'targets'
+      _make_hidden_targets() {
+        reply=( '*/*' ${(b)${(f)"$(command make -nsp --no-print-directory 2>/dev/null | sed -n '/^# Not a target:/{n;s/:.*//;p;}')"}} )
+      }
+      zstyle -e ':completion:*:*:make:*:targets' ignored-patterns '_make_hidden_targets'
+
+      # ssh: complete the hosts from ~/.ssh/config.
+      _ssh_config_hosts() {
+        local key rest
+        reply=()
+        while read -r key rest; do
+          [[ ${key:l} == host ]] && reply+=( ${${(z)rest}:#*[*?!]*} )
+        done < ~/.ssh/config 2>/dev/null
+      }
+      zstyle -e ':completion:*:ssh:*' hosts '_ssh_config_hosts'
+      zstyle ':completion:*:ssh:*' tag-order hosts
+  - path: /usr/local/share/gpuaas/zsh/zprofile
+    content: |
+      # Login settings that Ubuntu keeps where zsh does not look (gpuaas.py, package zsh): the scripts in
+      # /etc/profile.d (e.g. the PATH of the CUDA toolkit) and the PATH entries of ~/.profile (juliaup).
+      for script in /etc/profile.d/*.sh(N); do
+        # modules.sh chooses its init by shell name; ~/.zshrc loads the zsh init of Environment Modules.
+        [[ $script == */modules.sh ]] || emulate sh -c ". ${(q)script}"
+      done
+      unset script
+      [[ -d ~/.juliaup/bin ]] && path=(~/.juliaup/bin $path)
+      [[ -d ~/.local/bin ]] && path=(~/.local/bin $path)
+  - path: /usr/local/share/gpuaas/zsh/zshenv
+    content: |
+      # Ubuntu's /etc/zsh/zshrc would run compinit before Oh My Zsh runs it again (slow start).
+      skip_global_compinit=1
+runcmd:
+  - test -d /home/ubuntu/.oh-my-zsh || runuser -u ubuntu -- env HOME=/home/ubuntu git clone -q --depth 1 https://github.com/ohmyzsh/ohmyzsh /home/ubuntu/.oh-my-zsh
+  - for p in zsh-autosuggestions zsh-syntax-highlighting; do d=/home/ubuntu/.oh-my-zsh/custom/plugins/$p; test -d $d || runuser -u ubuntu -- env HOME=/home/ubuntu git clone -q --depth 1 https://github.com/zsh-users/$p $d; done
+  - for f in zshrc zprofile zshenv; do test -e /home/ubuntu/.$f || install -o ubuntu -g ubuntu -m 0644 /usr/local/share/gpuaas/zsh/$f /home/ubuntu/.$f; done
+  - usermod -s /usr/bin/zsh ubuntu

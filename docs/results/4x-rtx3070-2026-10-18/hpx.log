@@ -1,0 +1,135 @@
+== run 1
+Loading hpx/1.11.0
+  Loading requirement: cuda/13.0.2
+-- The CXX compiler identification is GNU 13.3.0
+-- The CUDA compiler identification is NVIDIA 13.0.88
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting CUDA compiler ABI info
+-- Detecting CUDA compiler ABI info - done
+-- Check for working CUDA compiler: /opt/spack/opt/spack/linux-x86_64_v3/cuda-13.0.2-doz2i7bovk2rswfbes2aiif2nb35hh53/bin/nvcc - skipped
+-- Detecting CUDA compile features
+-- Detecting CUDA compile features - done
+-- Found Asio: /opt/spack/opt/spack/linux-x86_64_v3/asio-1.32.0-vidcxa24hffwpotbrrjqrk6gjzfdlsl5/include (found suitable version "1.32.0", minimum required is "1.12.0") 
+CMake Warning (dev) at /opt/spack/opt/spack/linux-x86_64_v3/hpx-1.11.0-rszb72lnbguw64nzp3wzyqy4ieoy33dq/lib/cmake/HPX/HPX_SetupBoost.cmake:40 (find_package):
+  Policy CMP0144 is not set: find_package uses upper-case <PACKAGENAME>_ROOT
+  variables.  Run "cmake --help-policy CMP0144" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+
+  Environment variable BOOST_ROOT is set to:
+
+    /opt/spack/opt/spack/linux-x86_64_v3/boost-1.90.0-e7yzqdizro2knh7x6q23ilggutftkyvu
+
+  For compatibility, find_package is ignoring the variable, but code in a
+  .cmake module might still use it.
+Call Stack (most recent call first):
+  /opt/spack/opt/spack/linux-x86_64_v3/hpx-1.11.0-rszb72lnbguw64nzp3wzyqy4ieoy33dq/lib/cmake/HPX/HPXConfig.cmake:112 (include)
+  CMakeLists.txt:9 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Using system allocator.
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found Hwloc: /opt/spack/opt/spack/linux-x86_64_v3/hwloc-2.13.0-g6f75gfseyjm3bm7vvmdm6nndxr3spcf/lib/libhwloc.so  
+-- Found CUDAToolkit: /opt/spack/opt/spack/linux-x86_64_v3/cuda-13.0.2-doz2i7bovk2rswfbes2aiif2nb35hh53/targets/x86_64-linux/include (found version "13.0.88") 
+-- Configuring done (11.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/gpuaas-4gpu-runall/workspace/hpx/build
+[  8%] Building CXX object CMakeFiles/pi_seq.dir/pi_seq.cpp.o
+[ 16%] Linking CXX executable pi_seq
+[ 16%] Built target pi_seq
+[ 25%] Building CXX object CMakeFiles/pi_cpu.dir/pi_cpu.cpp.o
+[ 33%] Linking CXX executable pi_cpu
+[ 33%] Built target pi_cpu
+[ 41%] Building CUDA object CMakeFiles/pi_gpu.dir/pi_gpu.cu.o
+[ 50%] Linking CXX executable pi_gpu
+[ 50%] Built target pi_gpu
+[ 58%] Building CXX object CMakeFiles/matmul_seq.dir/matmul_seq.cpp.o
+[ 66%] Linking CXX executable matmul_seq
+[ 66%] Built target matmul_seq
+[ 75%] Building CXX object CMakeFiles/matmul_cpu.dir/matmul_cpu.cpp.o
+[ 83%] Linking CXX executable matmul_cpu
+[ 83%] Built target matmul_cpu
+[ 91%] Building CUDA object CMakeFiles/matmul_gpu.dir/matmul_gpu.cu.o
+[100%] Linking CXX executable matmul_gpu
+[100%] Built target matmul_gpu
+CPU sequential (HPX for_loop seq): pi = 3.141592653590 (error 1.8e-13) in 1.443 s (4.2 GFLOP/s)
+CPU (HPX, 4 worker threads, 16 tasks): pi = 3.141592653590 (error 3.9e-14) in 0.456 s (13.2 GFLOP/s)
+GPU (CUDA kernel via HPX cuda_executor): pi = 3.141592653590 (error 2.2e-15) in 0.093 s (64.3 GFLOP/s)
+CPU sequential (HPX for_loop seq): 2048x2048 matrix product correct in 2.436 s (7.1 GFLOP/s)
+CPU (HPX for_loop, 4 worker threads): 2048x2048 matrix product correct in 0.882 s (19.5 GFLOP/s)
+GPU (CUDA kernel via HPX cuda_executor): 2048x2048 matrix product correct in 0.031 s (557.0 GFLOP/s)
+== run 2
+Loading hpx/1.11.0
+  Loading requirement: cuda/13.0.2
+CMake Warning (dev) at /opt/spack/opt/spack/linux-x86_64_v3/hpx-1.11.0-rszb72lnbguw64nzp3wzyqy4ieoy33dq/lib/cmake/HPX/HPX_SetupBoost.cmake:40 (find_package):
+  Policy CMP0144 is not set: find_package uses upper-case <PACKAGENAME>_ROOT
+  variables.  Run "cmake --help-policy CMP0144" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+
+  Environment variable BOOST_ROOT is set to:
+
+    /opt/spack/opt/spack/linux-x86_64_v3/boost-1.90.0-e7yzqdizro2knh7x6q23ilggutftkyvu
+
+  For compatibility, find_package is ignoring the variable, but code in a
+  .cmake module might still use it.
+Call Stack (most recent call first):
+  /opt/spack/opt/spack/linux-x86_64_v3/hpx-1.11.0-rszb72lnbguw64nzp3wzyqy4ieoy33dq/lib/cmake/HPX/HPXConfig.cmake:112 (include)
+  CMakeLists.txt:9 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Using system allocator.
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/gpuaas-4gpu-runall/workspace/hpx/build
+[ 16%] Built target pi_seq
+[ 33%] Built target pi_cpu
+[ 50%] Built target pi_gpu
+[ 66%] Built target matmul_seq
+[ 83%] Built target matmul_cpu
+[100%] Built target matmul_gpu
+CPU sequential (HPX for_loop seq): pi = 3.141592653590 (error 1.8e-13) in 1.459 s (4.1 GFLOP/s)
+CPU (HPX, 4 worker threads, 16 tasks): pi = 3.141592653590 (error 3.9e-14) in 0.459 s (13.1 GFLOP/s)
+GPU (CUDA kernel via HPX cuda_executor): pi = 3.141592653590 (error 8.9e-16) in 0.093 s (64.2 GFLOP/s)
+CPU sequential (HPX for_loop seq): 2048x2048 matrix product correct in 2.752 s (6.2 GFLOP/s)
+CPU (HPX for_loop, 4 worker threads): 2048x2048 matrix product correct in 0.901 s (19.1 GFLOP/s)
+GPU (CUDA kernel via HPX cuda_executor): 2048x2048 matrix product correct in 0.031 s (554.9 GFLOP/s)
+== run 3
+Loading hpx/1.11.0
+  Loading requirement: cuda/13.0.2
+CMake Warning (dev) at /opt/spack/opt/spack/linux-x86_64_v3/hpx-1.11.0-rszb72lnbguw64nzp3wzyqy4ieoy33dq/lib/cmake/HPX/HPX_SetupBoost.cmake:40 (find_package):
+  Policy CMP0144 is not set: find_package uses upper-case <PACKAGENAME>_ROOT
+  variables.  Run "cmake --help-policy CMP0144" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+
+  Environment variable BOOST_ROOT is set to:
+
+    /opt/spack/opt/spack/linux-x86_64_v3/boost-1.90.0-e7yzqdizro2knh7x6q23ilggutftkyvu
+
+  For compatibility, find_package is ignoring the variable, but code in a
+  .cmake module might still use it.
+Call Stack (most recent call first):
+  /opt/spack/opt/spack/linux-x86_64_v3/hpx-1.11.0-rszb72lnbguw64nzp3wzyqy4ieoy33dq/lib/cmake/HPX/HPXConfig.cmake:112 (include)
+  CMakeLists.txt:9 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Using system allocator.
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/gpuaas-4gpu-runall/workspace/hpx/build
+[ 16%] Built target pi_seq
+[ 33%] Built target pi_cpu
+[ 50%] Built target pi_gpu
+[ 66%] Built target matmul_seq
+[ 83%] Built target matmul_cpu
+[100%] Built target matmul_gpu
+CPU sequential (HPX for_loop seq): pi = 3.141592653590 (error 1.8e-13) in 1.425 s (4.2 GFLOP/s)
+CPU (HPX, 4 worker threads, 16 tasks): pi = 3.141592653590 (error 3.9e-14) in 0.458 s (13.1 GFLOP/s)
+GPU (CUDA kernel via HPX cuda_executor): pi = 3.141592653590 (error 1.3e-15) in 0.093 s (64.2 GFLOP/s)
+CPU sequential (HPX for_loop seq): 2048x2048 matrix product correct in 2.920 s (5.9 GFLOP/s)
+CPU (HPX for_loop, 4 worker threads): 2048x2048 matrix product correct in 0.948 s (18.1 GFLOP/s)
+GPU (CUDA kernel via HPX cuda_executor): 2048x2048 matrix product correct in 0.039 s (436.7 GFLOP/s)

@@ -1,0 +1,18 @@
+== run 1
+CPU: hello from a container with 4 CPUs
+GPU 0: NVIDIA GeForce RTX 3070 (UUID: GPU-64d7cde5-1679-a2a6-bc15-526cc71aa233)
+GPU 1: NVIDIA GeForce RTX 3070 (UUID: GPU-56de5e8a-f371-17b1-b109-bd0f90d7dfd9)
+GPU 2: NVIDIA GeForce RTX 3070 (UUID: GPU-3721dcfb-ca0a-5fef-d09c-41311de70ee4)
+GPU 3: NVIDIA GeForce RTX 3070 (UUID: GPU-cbec82ab-8ab3-159c-8cf0-1a81cf466098)
+== run 2
+CPU: hello from a container with 4 CPUs
+GPU 0: NVIDIA GeForce RTX 3070 (UUID: GPU-64d7cde5-1679-a2a6-bc15-526cc71aa233)
+GPU 1: NVIDIA GeForce RTX 3070 (UUID: GPU-56de5e8a-f371-17b1-b109-bd0f90d7dfd9)
+GPU 2: NVIDIA GeForce RTX 3070 (UUID: GPU-3721dcfb-ca0a-5fef-d09c-41311de70ee4)
+GPU 3: NVIDIA GeForce RTX 3070 (UUID: GPU-cbec82ab-8ab3-159c-8cf0-1a81cf466098)
+== run 3
+CPU: hello from a container with 4 CPUs
+GPU 0: NVIDIA GeForce RTX 3070 (UUID: GPU-64d7cde5-1679-a2a6-bc15-526cc71aa233)
+GPU 1: NVIDIA GeForce RTX 3070 (UUID: GPU-56de5e8a-f371-17b1-b109-bd0f90d7dfd9)
+GPU 2: NVIDIA GeForce RTX 3070 (UUID: GPU-3721dcfb-ca0a-5fef-d09c-41311de70ee4)
+GPU 3: NVIDIA GeForce RTX 3070 (UUID: GPU-cbec82ab-8ab3-159c-8cf0-1a81cf466098)

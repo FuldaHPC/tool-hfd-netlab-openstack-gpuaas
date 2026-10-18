@@ -1,0 +1,196 @@
+# Spack (https://spack.io) as system-wide HPC package manager with Environment Modules:
+# "module avail" lists the installed HPC packages, "module load kokkos" loads one.
+# - /opt/spack: Spack 1.2.2; the package recipes are pinned to a tested spack-packages commit,
+#   which gives the newest stable versions at that time (update SPACK_PACKAGES_COMMIT deliberately).
+# - /opt/spack-env: the Spack environment of the HPC packages, installed after the reboot from the GPUaaS
+#   binary cache (built with tools/spack-cache/) or, for what the cache lacks, from source for the GPU of
+#   the instance (gpuaas-spack replaces @CUDA_ARCH@ with its compute capability).
+# - Ubuntu packages serve as externals, so that Spack builds as little as possible.
+# - /opt/spack-repos/spack_repo/gpuaas: overlay repository with small subclasses of builtin recipes: llvm
+#   adds the OpenMP device runtime for NVIDIA GPUs and Flang's runtime (one LLVM for Chapel and
+#   llvm-offload), openmpi adds a release newer than the pinned recipes, and hpx needs only Boost's headers.
+# - The whole HPC stack shares Spack's CUDA 13.0, the newest CUDA that Chapel supports; CUDA 13.0
+#   conflicts with the glibc of Ubuntu 26.04 (fixed only in CUDA 13.1), hence Ubuntu 24.04.
+gpuaas:
+  title: Spack with Environment Modules
+  group: HPC (Spack, Ubuntu 24.04)
+  order: 50
+  disk: 8.5  # Spack, its caches and Spack's CUDA (7 GB), which every HPC package uses
+  os:
+    ubuntu-24.04: tested
+    ubuntu-26.04: "no: the HPC stack uses CUDA 13.0 (for Chapel), which conflicts with the glibc of Ubuntu 26.04"
+  check: HOME=/root /opt/spack/bin/spack --version
+packages:
+  - build-essential
+  - gfortran
+  - git
+  - python3
+  - python3-dev
+  - cmake
+  - ninja-build
+  - pkg-config
+  - autoconf
+  - automake
+  - libtool
+  - bison
+  - flex
+  - re2c
+  - gettext
+  # Libraries that "spack external find" registers need their headers, or builds that link
+  # them fail (e.g. libevent: "openssl is a must but can not be found").
+  - libncurses-dev
+  - zlib1g-dev
+  - libzstd-dev
+  - libxml2-dev
+  - libssl-dev
+  - libcurl4-openssl-dev
+  - liblzma-dev
+  - libbz2-dev
+  - hwloc
+  - libhwloc-dev
+  - numactl
+  - libnuma-dev
+  - unzip
+  - patch
+  - file
+  - environment-modules
+write_files:
+  - path: /opt/spack-env/spack.yaml
+    content: |
+      spack:
+        specs: []
+        view: false
+        repos:
+          gpuaas: /opt/spack-repos/spack_repo/gpuaas
+        # Binary cache for RTX 3070/3080 (sm_86), built with tools/spack-cache/ and stored in a public
+        # Swift container of the NetLab cloud; Spack installs from it and compiles only what is missing.
+        # Unsigned and without TLS verification, because the cloud's internal CA is not available;
+        # source downloads stay protected by Spack's checksums.
+        mirrors:
+          gpuaas:
+            url: https://10.32.4.25/swift/v1/gpuaas-spack-cache
+            source: false
+            signed: false
+        config:
+          verify_ssl: false
+        concretizer:
+          unify: true
+          reuse: true
+          targets:
+            granularity: generic
+        packages:
+          all:
+            # Generic x86-64-v3 instead of the host's CPU, so snapshots and the binary cache run on
+            # every cloud host (a build host with AVX-512 would otherwise produce x86_64_v4 code).
+            require: "target=x86_64_v3"
+          cuda:
+            require: "@13.0 +allow-unsupported-compilers"
+          # One LLVM for Chapel (needs 22 and targets=all with CUDA 13) and OpenMP offloading from C and
+          # Fortran (Flang needs MLIR); without the parts nobody here uses (LLDB, Polly, libc++, compiler-rt).
+          llvm:
+            require: "@22 +clang +flang +mlir +lld +offload +libomptarget openmp=runtime targets=all +llvm_dylib +link_llvm_dylib ~lldb ~polly ~python ~gold compiler-rt=none libcxx=none libunwind=none"
+        modules:
+          default:
+            roots:
+              tcl: /opt/spack-modules
+            arch_folder: false
+            enable: [tcl]
+            tcl:
+              hide_implicits: true
+              # "module load chapel/2.10.0" instead of "chapel/2.10.0-mprjem3" (one build per package).
+              hash_length: 0
+              all:
+                autoload: direct
+              projections:
+                all: "{name}/{version}"
+  - path: /opt/spack-repos/spack_repo/gpuaas/repo.yaml
+    content: |
+      repo:
+        namespace: gpuaas
+        api: v2.5
+  - path: /opt/spack-repos/spack_repo/gpuaas/packages/llvm/package.py
+    content: |
+      # LLVM from Spack's builtin repository plus the OpenMP device runtime for NVIDIA GPUs (gpuaas.py).
+      import glob
+      import os
+
+      from spack.package import *
+      from spack_repo.builtin.packages.llvm.package import Llvm as BuiltinLlvm
+
+
+      class Llvm(BuiltinLlvm):
+          """Since LLVM 21 the OpenMP device runtime is built as a runtime for the GPU target, and Flang's
+          runtime is the runtime flang-rt; the builtin recipe requests neither, so clang -fopenmp
+          --offload-arch=sm_86 could not link device code and flang no programs at all.
+          The host OpenMP runtime (libomp, libomptarget) lies in lib/<triple>, for which clang adds no
+          rpath, so a clang config file adds one: programs run without LD_LIBRARY_PATH, which would also
+          put LLVM's libgomp.so.1 alias in front of GCC's libgomp."""
+
+          def cmake_args(self):
+              args = super().cmake_args()
+              if self.spec.satisfies("@21: +flang"):
+                  # Since LLVM 21 Flang's runtime (needed to link Fortran programs) is a runtime of its own.
+                  args = [a + ";flang-rt" if a.startswith("-DLLVM_ENABLE_RUNTIMES") else a for a in args]
+              if self.spec.satisfies("@21: +offload"):
+                  args.append(self.define("LLVM_RUNTIME_TARGETS", "default;nvptx64-nvidia-cuda"))
+                  args.append(self.define("RUNTIMES_nvptx64-nvidia-cuda_LLVM_ENABLE_RUNTIMES", "openmp"))
+              return args
+
+          @run_after("install")
+          def add_openmp_rpath(self):
+              # In <triple>.cfg, which clang and clang++ read in addition to clang.cfg/clang++.cfg: the
+              # inherited post_install rewrites those after this callback (Spack runs the callbacks of
+              # a subclass first). "$" marks a link-only option.
+              for libomp in glob.glob(join_path(self.prefix.lib, "*", "libomp.so")):
+                  libdir = os.path.dirname(libomp)
+                  with open(join_path(self.prefix.bin, os.path.basename(libdir) + ".cfg"), "w") as f:
+                      f.write(f"$-Wl,-rpath,{libdir}\n")
+  - path: /opt/spack-repos/spack_repo/gpuaas/packages/openmpi/package.py
+    content: |
+      # Open MPI from Spack's builtin repository plus a newer release (gpuaas.py); remove the version once
+      # the pinned spack-packages commit has it.
+      from spack.package import *
+      from spack_repo.builtin.packages.openmpi.package import Openmpi as BuiltinOpenmpi
+
+
+      class Openmpi(BuiltinOpenmpi):
+          # Released 2026-09-16; checksum from https://www.open-mpi.org/software/ompi/v5.0/
+          version("5.0.11", sha256="e668a3c4acd50c41dc204c8a6dd98a611e0f26af89cf677577fa9be8a2698003")
+  - path: /opt/spack-repos/spack_repo/gpuaas/packages/hpx/package.py
+    content: |
+      # HPX from Spack's builtin repository with only Boost's headers (gpuaas.py).
+      import spack.spec
+      from spack.package import *
+      from spack_repo.builtin.packages.hpx.package import Hpx as BuiltinHpx
+
+
+      class Hpx(BuiltinHpx):
+          """The builtin recipe asks for Boost with 19 compiled libraries (Boost.with_default_variants), which
+          also pulls in ICU, but HPX 1.11 links none of them; plain boost installs only the headers."""
+
+
+      # Directives cannot remove an inherited dependency, so the boost requirement is replaced here.
+      for _dependencies in Hpx.dependencies.values():
+          if "boost" in _dependencies and _dependencies["boost"].spec.satisfies("+atomic"):
+              _dependencies["boost"].spec = spack.spec.Spec("boost")
+  - path: /usr/local/sbin/gpuaas-spack
+    permissions: "0755"
+    content: |
+      #!/bin/sh
+      # gpuaas-spack SPEC: installs SPEC into the Spack environment /opt/spack-env for the GPU of this
+      # instance (@CUDA_ARCH@ becomes its compute capability, e.g. 86) and refreshes the module files.
+      set -e
+      export HOME=/root SPACK_ROOT=/opt/spack
+      . /opt/spack/share/spack/setup-env.sh
+      arch=$(nvidia-smi --query-gpu=compute_cap --format=csv,noheader | head -n 1 | tr -d .)
+      spack -e /opt/spack-env add $(echo "$*" | sed "s/@CUDA_ARCH@/$arch/g")
+      spack -e /opt/spack-env install --fail-fast -j "$(nproc)"
+      # --delete-tree: a package that becomes explicit (julia adds cuda) changes its module name from
+      # cuda/13.0.2-<hash> to cuda/13.0.2; without it the old file stays and "module load cuda" picks it.
+      spack -e /opt/spack-env module tcl refresh -y --delete-tree
+runcmd:
+  - git clone -q --depth 1 --branch v1.2.2 https://github.com/spack/spack /opt/spack
+  - HOME=/root /opt/spack/bin/spack repo update --commit cd2e1efc8cbee28a5e045ccad8545755cbd0fcf0 builtin
+  - HOME=/root /opt/spack/bin/spack compiler find
+  - HOME=/root /opt/spack/bin/spack external find cmake ninja autoconf automake libtool m4 pkgconf bison flex re2c gettext ncurses zlib zstd libxml2 hwloc numactl perl python git curl gmake diffutils tar gzip xz bzip2 openssl findutils sed gawk coreutils
+  - echo /opt/spack-modules >> /etc/environment-modules/modulespath

@@ -1,0 +1,100 @@
+== run 1
+Loading llvm/22.1.8
+  Loading requirement: cuda/13.0.2
+clang -O3 -march=x86-64-v3 -o pi_seq pi_seq.c
+clang -O3 -march=x86-64-v3 -fopenmp -o pi_cpu pi_cpu.c
+clang -O3 -march=x86-64-v3 -fopenmp --offload-arch=native -o pi_gpu pi_gpu.c
+clang -O3 -march=x86-64-v3 -o matmul_seq matmul_seq.c
+clang -O3 -march=x86-64-v3 -fopenmp -o matmul_cpu matmul_cpu.c
+clang -O3 -march=x86-64-v3 -fopenmp --offload-arch=native -o matmul_gpu matmul_gpu.c
+./pi_seq
+CPU sequential (Clang): pi = 3.141592653590 (error 1.8e-13) in 1.429 s (4.2 GFLOP/s)
+./pi_cpu
+CPU (Clang OpenMP, 4 threads): pi = 3.141592653590 (error 2.8e-14) in 0.457 s (13.1 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./pi_gpu
+GPU (Clang OpenMP target): pi = 3.141592653590 (error 3.1e-15) in 0.144 s (41.6 GFLOP/s)
+./matmul_seq
+CPU sequential (Clang): 2048x2048 matrix product correct in 2.339 s (7.3 GFLOP/s)
+./matmul_cpu
+CPU (Clang OpenMP, 4 threads): 2048x2048 matrix product correct in 0.838 s (20.5 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./matmul_gpu
+GPU (Clang OpenMP target): 2048x2048 matrix product correct in 0.068 s (251.8 GFLOP/s)
+make: Entering directory '/tmp/gpuaas-4gpu-runall/workspace/llvm-offload/fortran'
+flang -O3 -march=x86-64-v3 -c common.f90
+flang -O3 -march=x86-64-v3 -o pi_seq pi_seq.f90 common.o
+flang -O3 -march=x86-64-v3 -fopenmp -o pi_cpu pi_cpu.f90 common.o
+flang -O3 -march=x86-64-v3 -fopenmp --offload-arch=native -o pi_gpu pi_gpu.f90 common.o
+flang -O3 -march=x86-64-v3 -o matmul_seq matmul_seq.f90 common.o
+flang -O3 -march=x86-64-v3 -fopenmp -o matmul_cpu matmul_cpu.f90 common.o
+flang -O3 -march=x86-64-v3 -fopenmp --offload-arch=native -o matmul_gpu matmul_gpu.f90 common.o
+./pi_seq
+CPU sequential (flang): pi = 3.141592653590 (error 1.8e-13) in 1.446 s (4.1 GFLOP/s)
+./pi_cpu
+CPU (flang OpenMP, 4 threads): pi = 3.141592653590 (error 2.8e-14) in 0.475 s (12.6 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./pi_gpu
+GPU (flang OpenMP target): pi = 3.141592653590 (error 4.4e-16) in 0.093 s (64.2 GFLOP/s)
+./matmul_seq
+CPU sequential (flang): 2048x2048 matrix product correct in 2.351 s (7.3 GFLOP/s)
+./matmul_cpu
+CPU (flang OpenMP, 4 threads): 2048x2048 matrix product correct in 0.832 s (20.6 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./matmul_gpu
+GPU (flang OpenMP target): 2048x2048 matrix product correct in 0.291 s (59.0 GFLOP/s)
+make: Leaving directory '/tmp/gpuaas-4gpu-runall/workspace/llvm-offload/fortran'
+== run 2
+Loading llvm/22.1.8
+  Loading requirement: cuda/13.0.2
+./pi_seq
+CPU sequential (Clang): pi = 3.141592653590 (error 1.8e-13) in 1.410 s (4.3 GFLOP/s)
+./pi_cpu
+CPU (Clang OpenMP, 4 threads): pi = 3.141592653590 (error 2.8e-14) in 0.460 s (13.0 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./pi_gpu
+GPU (Clang OpenMP target): pi = 3.141592653590 (error 3.1e-15) in 0.144 s (41.6 GFLOP/s)
+./matmul_seq
+CPU sequential (Clang): 2048x2048 matrix product correct in 2.396 s (7.2 GFLOP/s)
+./matmul_cpu
+CPU (Clang OpenMP, 4 threads): 2048x2048 matrix product correct in 0.842 s (20.4 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./matmul_gpu
+GPU (Clang OpenMP target): 2048x2048 matrix product correct in 0.069 s (247.5 GFLOP/s)
+make: Entering directory '/tmp/gpuaas-4gpu-runall/workspace/llvm-offload/fortran'
+./pi_seq
+CPU sequential (flang): pi = 3.141592653590 (error 1.8e-13) in 1.427 s (4.2 GFLOP/s)
+./pi_cpu
+CPU (flang OpenMP, 4 threads): pi = 3.141592653590 (error 2.8e-14) in 0.504 s (11.9 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./pi_gpu
+GPU (flang OpenMP target): pi = 3.141592653590 (error 4.4e-16) in 0.093 s (64.2 GFLOP/s)
+./matmul_seq
+CPU sequential (flang): 2048x2048 matrix product correct in 2.300 s (7.5 GFLOP/s)
+./matmul_cpu
+CPU (flang OpenMP, 4 threads): 2048x2048 matrix product correct in 0.865 s (19.9 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./matmul_gpu
+GPU (flang OpenMP target): 2048x2048 matrix product correct in 0.284 s (60.4 GFLOP/s)
+make: Leaving directory '/tmp/gpuaas-4gpu-runall/workspace/llvm-offload/fortran'
+== run 3
+Loading llvm/22.1.8
+  Loading requirement: cuda/13.0.2
+./pi_seq
+CPU sequential (Clang): pi = 3.141592653590 (error 1.8e-13) in 1.477 s (4.1 GFLOP/s)
+./pi_cpu
+CPU (Clang OpenMP, 4 threads): pi = 3.141592653590 (error 2.8e-14) in 0.512 s (11.7 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./pi_gpu
+GPU (Clang OpenMP target): pi = 3.141592653590 (error 3.1e-15) in 0.142 s (42.1 GFLOP/s)
+./matmul_seq
+CPU sequential (Clang): 2048x2048 matrix product correct in 2.455 s (7.0 GFLOP/s)
+./matmul_cpu
+CPU (Clang OpenMP, 4 threads): 2048x2048 matrix product correct in 0.847 s (20.3 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./matmul_gpu
+GPU (Clang OpenMP target): 2048x2048 matrix product correct in 0.075 s (230.2 GFLOP/s)
+make: Entering directory '/tmp/gpuaas-4gpu-runall/workspace/llvm-offload/fortran'
+./pi_seq
+CPU sequential (flang): pi = 3.141592653590 (error 1.8e-13) in 1.422 s (4.2 GFLOP/s)
+./pi_cpu
+CPU (flang OpenMP, 4 threads): pi = 3.141592653590 (error 2.8e-14) in 0.473 s (12.7 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./pi_gpu
+GPU (flang OpenMP target): pi = 3.141592653590 (error 4.4e-16) in 0.093 s (64.2 GFLOP/s)
+./matmul_seq
+CPU sequential (flang): 2048x2048 matrix product correct in 2.445 s (7.0 GFLOP/s)
+./matmul_cpu
+CPU (flang OpenMP, 4 threads): 2048x2048 matrix product correct in 0.879 s (19.5 GFLOP/s)
+OMP_TARGET_OFFLOAD=MANDATORY ./matmul_gpu
+GPU (flang OpenMP target): 2048x2048 matrix product correct in 0.293 s (58.7 GFLOP/s)
+make: Leaving directory '/tmp/gpuaas-4gpu-runall/workspace/llvm-offload/fortran'

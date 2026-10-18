@@ -1,0 +1,65 @@
+== run 1
+Loading chapel/2.10.0
+  Loading requirement: cuda/13.0.2 llvm/22.1.8
+chpl --fast -o pi_seq pi_seq.chpl
+chpl --fast -o pi_cpu pi_cpu.chpl
+chpl --fast -o pi_gpu pi_gpu.chpl
+chpl --fast -o pi_gpus pi_gpus.chpl
+chpl --fast -o matmul_seq matmul_seq.chpl
+chpl --fast -o matmul_cpu matmul_cpu.chpl
+chpl --fast -o matmul_gpu matmul_gpu.chpl
+chpl --fast -o matmul_gpus matmul_gpus.chpl
+./pi_seq
+CPU sequential (Chapel for): pi = 3.141592653590 (error 1.8e-13) in 1.445 s (4.2 GFLOP/s)
+./pi_cpu
+CPU (Chapel forall, 4 tasks): pi = 3.141592653590 (error 2.8e-14) in 0.462 s (13.0 GFLOP/s)
+./pi_gpu
+GPU (Chapel forall on here.gpus[0]): pi = 3.141592653590 (error 4.4e-16) in 0.094 s (63.6 GFLOP/s)
+./pi_gpus
+GPU (Chapel forall on 4 GPUs): pi = 3.141592653590 (error 0.0e+00) in 0.031 s (191.3 GFLOP/s)
+./matmul_seq
+CPU sequential (Chapel for): 2048x2048 matrix product correct in 2.294 s (7.5 GFLOP/s)
+./matmul_cpu
+CPU (Chapel forall, 4 tasks): 2048x2048 matrix product correct in 0.793 s (21.7 GFLOP/s)
+./matmul_gpu
+GPU (Chapel forall on here.gpus[0]): 2048x2048 matrix product correct in 0.035 s (487.1 GFLOP/s)
+./matmul_gpus
+GPU (Chapel forall on 4 GPUs): 2048x2048 matrix product correct in 0.023 s (740.8 GFLOP/s)
+== run 2
+Loading chapel/2.10.0
+  Loading requirement: cuda/13.0.2 llvm/22.1.8
+./pi_seq
+CPU sequential (Chapel for): pi = 3.141592653590 (error 1.8e-13) in 1.472 s (4.1 GFLOP/s)
+./pi_cpu
+CPU (Chapel forall, 4 tasks): pi = 3.141592653590 (error 2.8e-14) in 0.465 s (12.9 GFLOP/s)
+./pi_gpu
+GPU (Chapel forall on here.gpus[0]): pi = 3.141592653590 (error 4.4e-16) in 0.094 s (63.6 GFLOP/s)
+./pi_gpus
+GPU (Chapel forall on 4 GPUs): pi = 3.141592653590 (error 4.4e-16) in 0.032 s (188.2 GFLOP/s)
+./matmul_seq
+CPU sequential (Chapel for): 2048x2048 matrix product correct in 2.398 s (7.2 GFLOP/s)
+./matmul_cpu
+CPU (Chapel forall, 4 tasks): 2048x2048 matrix product correct in 0.794 s (21.6 GFLOP/s)
+./matmul_gpu
+GPU (Chapel forall on here.gpus[0]): 2048x2048 matrix product correct in 0.037 s (470.3 GFLOP/s)
+./matmul_gpus
+GPU (Chapel forall on 4 GPUs): 2048x2048 matrix product correct in 0.023 s (759.3 GFLOP/s)
+== run 3
+Loading chapel/2.10.0
+  Loading requirement: cuda/13.0.2 llvm/22.1.8
+./pi_seq
+CPU sequential (Chapel for): pi = 3.141592653590 (error 1.8e-13) in 1.444 s (4.2 GFLOP/s)
+./pi_cpu
+CPU (Chapel forall, 4 tasks): pi = 3.141592653590 (error 2.8e-14) in 0.457 s (13.1 GFLOP/s)
+./pi_gpu
+GPU (Chapel forall on here.gpus[0]): pi = 3.141592653590 (error 4.4e-16) in 0.095 s (63.5 GFLOP/s)
+./pi_gpus
+GPU (Chapel forall on 4 GPUs): pi = 3.141592653590 (error 4.4e-16) in 0.033 s (182.8 GFLOP/s)
+./matmul_seq
+CPU sequential (Chapel for): 2048x2048 matrix product correct in 2.385 s (7.2 GFLOP/s)
+./matmul_cpu
+CPU (Chapel forall, 4 tasks): 2048x2048 matrix product correct in 0.745 s (23.1 GFLOP/s)
+./matmul_gpu
+GPU (Chapel forall on here.gpus[0]): 2048x2048 matrix product correct in 0.037 s (465.7 GFLOP/s)
+./matmul_gpus
+GPU (Chapel forall on 4 GPUs): 2048x2048 matrix product correct in 0.023 s (739.1 GFLOP/s)

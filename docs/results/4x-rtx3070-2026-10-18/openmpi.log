@@ -1,0 +1,51 @@
+== run 1
+Loading openmpi/5.0.11
+  Loading requirement: cuda/13.0.2
+mpicc -O3 -march=x86-64-v3 -o pi_seq pi_seq.c
+mpicc -O3 -march=x86-64-v3 -o pi_cpu pi_cpu.c
+nvcc -ccbin mpicxx -O3 -Xcompiler -march=x86-64-v3 -arch=native -o pi_gpu pi_gpu.cu
+mpicc -O3 -march=x86-64-v3 -o matmul_seq matmul_seq.c
+mpicc -O3 -march=x86-64-v3 -o matmul_cpu matmul_cpu.c
+nvcc -ccbin mpicxx -O3 -Xcompiler -march=x86-64-v3 -arch=native -o matmul_gpu matmul_gpu.cu
+./pi_seq
+CPU sequential (GCC): pi = 3.141592653590 (error 1.8e-13) in 1.424 s (4.2 GFLOP/s)
+mpirun --oversubscribe -np 4 ./pi_cpu
+CPU (MPI, 4 ranks): pi = 3.141592653590 (error 2.8e-14) in 0.442 s (13.6 GFLOP/s)
+mpirun --oversubscribe -np 4 ./pi_gpu
+GPU (MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware): pi = 3.141592653590 (error 1.3e-15) in 0.024 s (250.5 GFLOP/s)
+./matmul_seq
+CPU sequential (GCC): 2048x2048 matrix product correct in 2.116 s (8.1 GFLOP/s)
+mpirun --oversubscribe -np 4 ./matmul_cpu
+CPU (MPI, 4 ranks): 2048x2048 matrix product correct in 1.017 s (16.9 GFLOP/s)
+mpirun --oversubscribe -np 4 ./matmul_gpu
+GPU (MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware): 2048x2048 matrix product correct in 0.049 s (351.9 GFLOP/s)
+== run 2
+Loading openmpi/5.0.11
+  Loading requirement: cuda/13.0.2
+./pi_seq
+CPU sequential (GCC): pi = 3.141592653590 (error 1.8e-13) in 1.450 s (4.1 GFLOP/s)
+mpirun --oversubscribe -np 4 ./pi_cpu
+CPU (MPI, 4 ranks): pi = 3.141592653590 (error 2.8e-14) in 0.481 s (12.5 GFLOP/s)
+mpirun --oversubscribe -np 4 ./pi_gpu
+GPU (MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware): pi = 3.141592653590 (error 8.9e-16) in 0.024 s (248.7 GFLOP/s)
+./matmul_seq
+CPU sequential (GCC): 2048x2048 matrix product correct in 2.089 s (8.2 GFLOP/s)
+mpirun --oversubscribe -np 4 ./matmul_cpu
+CPU (MPI, 4 ranks): 2048x2048 matrix product correct in 0.980 s (17.5 GFLOP/s)
+mpirun --oversubscribe -np 4 ./matmul_gpu
+GPU (MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware): 2048x2048 matrix product correct in 0.060 s (286.6 GFLOP/s)
+== run 3
+Loading openmpi/5.0.11
+  Loading requirement: cuda/13.0.2
+./pi_seq
+CPU sequential (GCC): pi = 3.141592653590 (error 1.8e-13) in 1.484 s (4.0 GFLOP/s)
+mpirun --oversubscribe -np 4 ./pi_cpu
+CPU (MPI, 4 ranks): pi = 3.141592653590 (error 2.8e-14) in 0.471 s (12.7 GFLOP/s)
+mpirun --oversubscribe -np 4 ./pi_gpu
+GPU (MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware): pi = 3.141592653590 (error 1.3e-15) in 0.024 s (248.6 GFLOP/s)
+./matmul_seq
+CPU sequential (GCC): 2048x2048 matrix product correct in 2.113 s (8.1 GFLOP/s)
+mpirun --oversubscribe -np 4 ./matmul_cpu
+CPU (MPI, 4 ranks): 2048x2048 matrix product correct in 1.027 s (16.7 GFLOP/s)
+mpirun --oversubscribe -np 4 ./matmul_gpu
+GPU (MPI, 4 ranks on 4 GPUs with CUDA kernels, CUDA-aware): 2048x2048 matrix product correct in 0.056 s (306.4 GFLOP/s)
