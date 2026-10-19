@@ -6,7 +6,7 @@ Details of `gpuaas.py`; the [README](../README.md) has the short version and the
 
 You need macOS or Linux (on Windows, WSL should work but is untested) with `ssh` and `ssh-keygen`.
 
-1. Network: the Hochschule Fulda network, or the VPN profile "05)_AI-NetLab-Pro" from outside.
+1. Network: the Hochschule Fulda network, or the EduVPN.
 2. Install [uv](https://docs.astral.sh/uv/): `curl -LsSf https://astral.sh/uv/install.sh | sh` (on macOS also `brew install uv`).
    On the first run uv downloads Python and the dependencies (openstacksdk, questionary, PyYAML; versions pinned in `gpuaas.py.lock`) into its cache, with no virtualenv and no admin rights.
 3. Get the code: `git clone https://github.com/FuldaHPC/tool-hfd-netlab-openstack-gpuaas.git && cd tool-hfd-netlab-openstack-gpuaas`
